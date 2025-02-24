@@ -1,0 +1,12 @@
+{
+  "name": "talkops",
+  "version": "1.2.1",
+  "author": "bierdok",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.7.9",
+    "ejs": "^3.1.10",
+    "ws": "^8.18.0"
+  },
+  "type": "module"
+}
