@@ -124,6 +124,6 @@ export default class Module {
     if (arg.constructor.name === "Array") {
       arg = arg.join("\n");
     }
-    return String(arg);
+    return String(arg).trim();
   }
 }
