@@ -13,7 +13,7 @@ export default class Module {
   defaultEnvironmentVariables = {
     AGENT_URLS: {
       defaultValue: "ws://talkops",
-      possibleValues: ["ws://talkops1,ws://talkops2"],
+      possibleValues: ["ws://talkops1", "ws://talkops2"],
       description: "A comma-separated list of WebSocket server URLs for real-time communication with specified agents.",
     },
   };
