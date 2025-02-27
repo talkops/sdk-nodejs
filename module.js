@@ -5,6 +5,7 @@ export const ModuleType = {
 };
 
 export default class Module {
+  id = null;
   name = "";
   type = null;
   version = null;
@@ -33,11 +34,13 @@ export default class Module {
         `type is required and must be a one of the following values: ${moduleTypeValues}.`
       );
     }
+    this.id = new Date().getTime()
     this.name = name;
     this.type = type;
   }
   toJSON() {
     return {
+      id: this.id,
       name: this.name,
       type: this.type,
       version: this.version,
