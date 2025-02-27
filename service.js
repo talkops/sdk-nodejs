@@ -8,7 +8,12 @@ export default class Service {
   #sockets = null
   constructor(agentUrls, modules) {
     this.#modules = Array.isArray(modules) ? modules : [modules];
-    this.#validateModules();
+    if (
+      !Array.isArray(this.#modules) ||
+      !this.#modules.every((item) => item instanceof Module)
+    ) {
+      throw new Error("modules must be an array of Module instances.");
+    }
     this.#sockets = new Map();
     this.#execute(agentUrls);
   }
@@ -32,7 +37,8 @@ export default class Service {
         if (module.type !== "Extension") continue;
         if (module.functions.length === 0) continue;
         for (const fn of module.functions) {
-          if (fn.name !== data.name) continue;
+          console.log(`${fn.name}_${module.id}`, data.name)
+          if (`${fn.name}_${module.id}` !== data.name) continue;
           const match = fn.toString().match(/\(([^)]*)\)/);
           const argumentsList = (
             match ? match[1].split(",").map((p) => p.trim()) : []
@@ -75,14 +81,6 @@ export default class Service {
         console.log('Service', url, 'published', hash)
         socket.lastHash = hash;
       }
-    }
-  }
-  #validateModules() {
-    if (
-      !Array.isArray(this.#modules) ||
-      !this.#modules.every((item) => item instanceof Module)
-    ) {
-      throw new Error("modules must be an array of Module instances.");
     }
   }
 }

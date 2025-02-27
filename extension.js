@@ -18,6 +18,13 @@ export default class Extension extends Module {
   }
 
   async setFunctions(functions) {
+      if (
+        !Array.isArray(functions) ||
+        !this.functions.every((fn) => typeof fn === 'function') ||
+        !this.functions.every((fn) => fn.name.trim().length > 0)
+      ) {
+        throw new Error("functions must be an array of named function.");
+      }
     this.functions = functions;
   }
 
