@@ -6,6 +6,7 @@
   "dependencies": {
     "axios": "^1.7.9",
     "ejs": "^3.1.10",
+    "js-yaml": "^4.1.0",
     "ws": "^8.18.0"
   },
   "type": "module"

@@ -37,7 +37,6 @@ export default class Service {
         if (module.type !== "Extension") continue;
         if (module.functions.length === 0) continue;
         for (const fn of module.functions) {
-          console.log(`${fn.name}_${module.id}`, data.name)
           if (`${fn.name}_${module.id}` !== data.name) continue;
           const match = fn.toString().match(/\(([^)]*)\)/);
           const argumentsList = (
