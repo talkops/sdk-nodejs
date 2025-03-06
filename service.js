@@ -2,6 +2,7 @@ import crypto from "crypto";
 import WebSocket from "ws";
 import Module from "./module.js";
 import pkg from "./package.json" assert { type: "json" };
+import yaml from "js-yaml";
 
 export default class Service {
   #modules = null
@@ -49,6 +50,8 @@ export default class Service {
           );
           if (typeof data.output === "boolean") {
             data.output = data.output ? "Yes" : "No";
+          } else if (typeof data.output === "object") {
+            data.output = yaml.dump(data.output);
           }
           socket.send(JSON.stringify(data));
           return;
