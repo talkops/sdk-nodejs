@@ -5,8 +5,8 @@ import pkg from "./package.json" assert { type: "json" };
 import yaml from "js-yaml";
 
 export default class Service {
-  #modules = null
-  #sockets = null
+  #modules = null;
+  #sockets = null;
   constructor(agentUrls, modules) {
     this.#modules = Array.isArray(modules) ? modules : [modules];
     if (
@@ -19,17 +19,17 @@ export default class Service {
     this.#execute(agentUrls);
   }
   #execute(agentUrls) {
-    agentUrls.filter(Boolean).forEach(url => this.#initSocket(url));
+    agentUrls.filter(Boolean).forEach((url) => this.#initSocket(url));
     setInterval(this.#publish.bind(this), 1000);
   }
   #initSocket(url) {
     const socket = new WebSocket(url);
     this.#sockets.set(url, socket);
     socket.onopen = () => {
-      console.log('Service', url, "connected")
+      console.log("Service", url, "connected");
     };
     socket.onerror = (err) => {
-      console.error('Service', url, 'socket.error', err);
+      console.error("Service", url, "socket.error", err);
     };
     socket.onmessage = async (event) => {
       const data = JSON.parse(event.data);
@@ -43,11 +43,7 @@ export default class Service {
           const argumentsList = (
             match ? match[1].split(",").map((p) => p.trim()) : []
           ).map((name) => data.args[name]);
-          data.output = await Reflect.apply(
-            fn,
-            null,
-            argumentsList
-          );
+          data.output = await Reflect.apply(fn, null, argumentsList);
           if (typeof data.output === "boolean") {
             data.output = data.output ? "Yes" : "No";
           } else if (typeof data.output === "object") {
@@ -59,7 +55,7 @@ export default class Service {
       }
     };
     socket.onclose = (e) => {
-      console.error('Service', url, "disconnected", e.reason);
+      console.error("Service", url, "disconnected", e.reason);
       this.#sockets.delete(url);
       setTimeout(this.#initSocket.bind(this, url), 1000);
     };
@@ -80,7 +76,7 @@ export default class Service {
       const hash = crypto.createHash("sha256").update(message).digest("hex");
       if (socket.lastHash === undefined || socket.lastHash !== hash) {
         socket.send(message);
-        console.log('Service', url, 'published', hash)
+        console.log("Service", url, "published", hash);
         socket.lastHash = hash;
       }
     }
