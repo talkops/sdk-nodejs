@@ -9,5 +9,11 @@
     "js-yaml": "^4.1.0",
     "ws": "^8.18.0"
   },
-  "type": "module"
+  "type": "module",
+  "scripts": {
+    "doc": "documentation build *.js -f md -o README.md"
+  },
+  "devDependencies": {
+    "documentation": "^14.0.3"
+  }
 }

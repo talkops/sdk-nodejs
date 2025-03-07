@@ -4,6 +4,10 @@ export const ModuleType = {
   KERNEL: "Kernel",
 };
 
+/**
+ * Represents a module.
+ * @class
+ */
 export default class Module {
   id = null;
   name = "";
@@ -44,6 +48,7 @@ export default class Module {
     this.name = name;
     this.type = type;
   }
+
   toJSON() {
     return {
       id: this.id,
@@ -53,15 +58,31 @@ export default class Module {
       errors: this.errors,
     };
   }
+
+  /**
+   * @param {string} version - The version of the module.
+   */
   setVersion(version) {
     this.version = version;
   }
+
+  /**
+   * @param {string} description - The description of the module.
+   */
   setDescription(description) {
     this.description = description;
   }
+
+  /**
+   * @param {string} installationGuide - The installation guide of the module.
+   */
   setInstallationGuide(installationGuide) {
     this.installationGuide = installationGuide;
   }
+
+  /**
+   * @param {array} environmentVariables - The environment variables of the extension.
+   */
   setEnvironmentVariables(environmentVariables) {
     this.environmentVariables = {};
     for (const name in environmentVariables) {
@@ -101,12 +122,21 @@ export default class Module {
       }
     }
   }
+
+  /**
+   * @param {string} dockerRepository - The docker repository of the extension.
+   */
   setDockerRepository(dockerRepository) {
     this.dockerRepository = dockerRepository;
   }
+
+  /**
+   * @param {string} dockerVolumeData - The docker volume data of the extension.
+   */
   setDockerVolumeData(dockerVolumeData) {
     this.dockerVolumeData = dockerVolumeData;
   }
+
   async resolve(arg) {
     if (arg === undefined) return undefined;
     if (arg.constructor.name === "AsyncFunction") {

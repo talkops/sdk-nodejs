@@ -3,7 +3,17 @@ import fs from "fs";
 import ejs from "ejs";
 import Module from "./module.js";
 
+/**
+ * Represents a readme.
+ * @class
+ */
 export default class Readme {
+
+  /**
+   * @param {string} templateUrl - The template URL.
+   * @param {string} path - The path of the readme file.
+   * @param {Module} module - The module (e.g. an extension).
+   */
   constructor(templateUrl, path, module) {
     if (!(module instanceof Module)) {
       throw new Error("module must be a Module instance.");

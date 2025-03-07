@@ -4,9 +4,18 @@ import Module from "./module.js";
 import pkg from "./package.json" assert { type: "json" };
 import yaml from "js-yaml";
 
+/**
+ * Represents a service.
+ * @class
+ */
 export default class Service {
   #modules = null;
   #sockets = null;
+
+  /**
+   * @param {array} agentUrls - The agent URLs.
+   * @param {Module|array} modules - The modules (e.g. an extension).
+   */
   constructor(agentUrls, modules) {
     this.#modules = Array.isArray(modules) ? modules : [modules];
     if (
