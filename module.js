@@ -15,10 +15,11 @@ export default class Module {
     AGENT_URLS: {
       defaultValue: "ws://talkops",
       possibleValues: ["ws://talkops1", "ws://talkops2"],
-      description: "A comma-separated list of WebSocket server URLs for real-time communication with specified agents.",
+      description:
+        "A comma-separated list of WebSocket server URLs for real-time communication with specified agents.",
     },
   };
-  mandatoryEnvironmentVariables = {}
+  mandatoryEnvironmentVariables = {};
   environmentVariables = this.defaultEnvironmentVariables;
   dockerRepository = "";
   dockerVolumeData = null;
@@ -34,7 +35,12 @@ export default class Module {
         `type is required and must be a one of the following values: ${moduleTypeValues}.`
       );
     }
-    this.id = new Date().getTime()
+    this.id = name
+      .toLowerCase()
+      .replace(/\s+/g, "_")
+      .replace(/[^\w_]+/g, "")
+      .replace(/_{2,}/g, "_")
+      .trim("_");
     this.name = name;
     this.type = type;
   }
@@ -44,7 +50,7 @@ export default class Module {
       name: this.name,
       type: this.type,
       version: this.version,
-      errors: this.errors
+      errors: this.errors,
     };
   }
   setVersion(version) {
@@ -71,7 +77,7 @@ export default class Module {
           process.env[name] = props.defaultValue;
         }
       } else {
-        this.mandatoryEnvironmentVariables[name] = props
+        this.mandatoryEnvironmentVariables[name] = props;
       }
     }
     for (const name in this.environmentVariables) {
@@ -81,7 +87,11 @@ export default class Module {
       }
       if (props.availableValues !== undefined) {
         if (!props.availableValues.includes(process.env[name])) {
-          this.errors.push(`The environment variable ${name} must be one of the following values: ${props.availableValues.join(', ')}.`);
+          this.errors.push(
+            `The environment variable ${name} must be one of the following values: ${props.availableValues.join(
+              ", "
+            )}.`
+          );
         }
       }
       if (props.validation !== undefined) {
