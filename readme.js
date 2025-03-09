@@ -10,8 +10,8 @@ import Module from "./module.js";
 export default class Readme {
 
   /**
-   * @param {string} templateUrl - The template URL.
-   * @param {string} path - The path of the readme file.
+   * @param {String} templateUrl - The template URL.
+   * @param {String} path - The path of the readme file.
    * @param {Module} module - The module (e.g. an extension).
    */
   constructor(templateUrl, path, module) {
