@@ -11,7 +11,7 @@
   },
   "type": "module",
   "scripts": {
-    "doc": "documentation build *.js -f md -o README.md"
+    "doc": "documentation readme *.js -s Documentation"
   },
   "devDependencies": {
     "documentation": "^14.0.3"

@@ -13,8 +13,8 @@ export default class Service {
   #sockets = null;
 
   /**
-   * @param {array} agentUrls - The agent URLs.
-   * @param {Module|array} modules - The modules (e.g. an extension).
+   * @param {Array<String>} agentUrls - The agent URLs.
+   * @param {Module|String<Module>} modules - The modules (e.g. an extension).
    */
   constructor(agentUrls, modules) {
     this.#modules = Array.isArray(modules) ? modules : [modules];

@@ -10,28 +10,28 @@ export default class Extension extends Module {
   functions = [];
 
   /**
-   * @param {string} name - The name of the extension.
+   * @param {String} name - The name of the extension.
    */
   constructor(name) {
     super(name, ModuleType.EXTENSION);
   }
 
   /**
-   * @param {string} instructions - The instructions of the extension for the AI agent.
+   * @param {String|Array<String>|Function|AsyncFunction} instructions - The instructions of the extension for the AI agent.
    */
   async setInstructions(instructions) {
     this.instructions = await this.resolveToString(instructions);
   }
 
   /**
-   * @param {array} functionSchemas - The function schemas of the extension for the AI agent.
+   * @param {Array<Object>|Function|AsyncFunction} functionSchemas - The function schemas of the extension for the AI agent.
    */
   async setFunctionSchemas(functionSchemas) {
     this.functionSchemas = await this.resolve(functionSchemas);
   }
 
   /**
-   * @param {array} functions - The named functions of the extension.
+   * @param {Array<Function|AsyncFunction>} functions - The named functions of the extension.
    */
   async setFunctions(functions) {
       if (
