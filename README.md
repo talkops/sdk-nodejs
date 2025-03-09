@@ -8,6 +8,7 @@ This software development kit is made to create [TalkOps](https://link.talkops.a
 
 #### Table of Contents
 
+*   [Alarm](#alarm)
 *   [Extension](#extension)
     *   [Parameters](#parameters)
     *   [setInstructions](#setinstructions)
@@ -16,37 +17,43 @@ This software development kit is made to create [TalkOps](https://link.talkops.a
         *   [Parameters](#parameters-2)
     *   [setFunctions](#setfunctions)
         *   [Parameters](#parameters-3)
-*   [Module](#module)
-    *   [Parameters](#parameters-4)
-    *   [setVersion](#setversion)
-        *   [Parameters](#parameters-5)
-    *   [setDescription](#setdescription)
-        *   [Parameters](#parameters-6)
-    *   [setInstallationGuide](#setinstallationguide)
-        *   [Parameters](#parameters-7)
-    *   [setEnvironmentVariables](#setenvironmentvariables)
-        *   [Parameters](#parameters-8)
-    *   [setDockerRepository](#setdockerrepository)
-        *   [Parameters](#parameters-9)
-    *   [setDockerVolumeData](#setdockervolumedata)
-        *   [Parameters](#parameters-10)
-*   [Notification](#notification)
+*   [Message](#message)
     *   [setText](#settext)
-        *   [Parameters](#parameters-11)
-    *   [setLevel](#setlevel)
-        *   [Parameters](#parameters-12)
-    *   [setPersistent](#setpersistent)
-        *   [Parameters](#parameters-13)
+        *   [Parameters](#parameters-4)
     *   [setFrom](#setfrom)
-        *   [Parameters](#parameters-14)
+        *   [Parameters](#parameters-5)
     *   [addTo](#addto)
-        *   [Parameters](#parameters-15)
+        *   [Parameters](#parameters-6)
+*   [Module](#module)
+    *   [Parameters](#parameters-7)
+    *   [setVersion](#setversion)
+        *   [Parameters](#parameters-8)
+    *   [setDescription](#setdescription)
+        *   [Parameters](#parameters-9)
+    *   [setInstallationGuide](#setinstallationguide)
+        *   [Parameters](#parameters-10)
+    *   [setEnvironmentVariables](#setenvironmentvariables)
+        *   [Parameters](#parameters-11)
+    *   [setDockerRepository](#setdockerrepository)
+        *   [Parameters](#parameters-12)
+    *   [setDockerVolumeData](#setdockervolumedata)
+        *   [Parameters](#parameters-13)
+*   [Levels](#levels)
+*   [Notification](#notification)
+    *   [setLevel](#setlevel)
+        *   [Parameters](#parameters-14)
 *   [Readme](#readme)
-    *   [Parameters](#parameters-16)
+    *   [Parameters](#parameters-15)
 *   [Service](#service)
-    *   [Parameters](#parameters-17)
+    *   [Parameters](#parameters-16)
     *   [send](#send)
-        *   [Parameters](#parameters-18)
+        *   [Parameters](#parameters-17)
+
+### Alarm
+
+**Extends Message**
+
+Represents an alarm.
 
 ### Extension
 
@@ -75,6 +82,34 @@ Represents an extension.
 ##### Parameters
 
 *   `functions` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)<([Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function) | AsyncFunction)>** The named functions of the extension.
+
+### Message
+
+Represents a message.
+
+#### setText
+
+##### Parameters
+
+*   `text` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The text of the message.
+
+Returns **[Message](#message)** The updated message instance.
+
+#### setFrom
+
+##### Parameters
+
+*   `emitter` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The emitter of the message.
+
+Returns **[Message](#message)** The updated message instance.
+
+#### addTo
+
+##### Parameters
+
+*   `clientId` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The client target unique identifier of the message.
+
+Returns **[Message](#message)** The updated message instance.
 
 ### Module
 
@@ -121,15 +156,17 @@ Represents a module.
 
 *   `dockerVolumeData` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The docker volume data of the extension.
 
+### Levels
+
+Represents levels for a notification.
+
+Type: [string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)
+
 ### Notification
 
+**Extends Message**
+
 Represents a notification.
-
-#### setText
-
-##### Parameters
-
-*   `text` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The text of the notification.
 
 #### setLevel
 
@@ -137,23 +174,7 @@ Represents a notification.
 
 *   `level` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The level of the notification (low, normal, high, critical).
 
-#### setPersistent
-
-##### Parameters
-
-*   `persistent` **[Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** The persistence of the notification.
-
-#### setFrom
-
-##### Parameters
-
-*   `emitter` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The emitter of the notification.
-
-#### addTo
-
-##### Parameters
-
-*   `clientId` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The client target unique identifier of the notification.
+Returns **[Notification](#notification)** The updated notification instance.
 
 ### Readme
 
@@ -178,4 +199,4 @@ Represents a service.
 
 ##### Parameters
 
-*   `notifications` **([Notification](#notification) | [Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)<[Notification](#notification)>)** The notifications.
+*   `messages` **([Message](#message) | [Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)<[Message](#message)>)** The messages.
