@@ -1,7 +1,7 @@
 import crypto from "crypto";
 import WebSocket from "ws";
 import Module from "./module.js";
-import pkg from "./package.json" assert { type: "json" };
+import pkg from "./package.json" with { type: "json" };
 import yaml from "js-yaml";
 
 /**
