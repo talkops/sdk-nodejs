@@ -1,6 +1,7 @@
 {
   "name": "talkops",
-  "version": "1.4.1",
+  "description": "TalkOps SDK: NodeJS",
+  "version": "1.4.2",
   "author": "bierdok",
   "license": "MIT",
   "dependencies": {
