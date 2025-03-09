@@ -1,6 +1,7 @@
 import crypto from "crypto";
 import WebSocket from "ws";
 import Module from "./module.js";
+import Notification from "./notification.js";
 import pkg from "./package.json" with { type: "json" };
 import yaml from "js-yaml";
 
@@ -14,7 +15,7 @@ export default class Service {
 
   /**
    * @param {Array<String>} agentUrls - The agent URLs.
-   * @param {Module|String<Module>} modules - The modules (e.g. an extension).
+   * @param {Module|Array<Module>} modules - The modules (e.g. an extension).
    */
   constructor(agentUrls, modules) {
     this.#modules = Array.isArray(modules) ? modules : [modules];
@@ -27,6 +28,7 @@ export default class Service {
     this.#sockets = new Map();
     this.#execute(agentUrls);
   }
+
   #execute(agentUrls) {
     agentUrls.filter(Boolean).forEach((url) => this.#initSocket(url));
     setInterval(this.#publish.bind(this), 1000);
@@ -51,7 +53,7 @@ export default class Service {
           const match = fn.toString().match(/\(([^)]*)\)/);
           const argumentsList = (
             match ? match[1].split(",").map((p) => p.trim()) : []
-          ).map((name) => data.args[name]);
+          ).map((name) => data.args[name] ?? data[name]);
           data.output = await Reflect.apply(fn, null, argumentsList);
           if (typeof data.output === "boolean") {
             data.output = data.output ? "Yes" : "No";
@@ -88,6 +90,25 @@ export default class Service {
         console.log("Service", url, "published", hash);
         socket.lastHash = hash;
       }
+    }
+  }
+
+  /**
+   * @param {Notification|Array<Notification>} notifications - The notifications.
+   */
+  send(notifications) {
+    notifications = Array.isArray(notifications) ? notifications : [notifications];
+    if (
+      !Array.isArray(notifications) ||
+      !notifications.every((item) => item instanceof Notification)
+    ) {
+      throw new Error("notifications must be an array of Notification instances.");
+    }
+    for (const [url, socket] of this.#sockets) {
+      socket.send(JSON.stringify({
+        type: 'notifications',
+        notifications: notifications.map(notification => notification.toJSON())
+      }));
     }
   }
 }

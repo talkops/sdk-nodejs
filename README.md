@@ -30,10 +30,23 @@ This software development kit is made to create [TalkOps](https://link.talkops.a
         *   [Parameters](#parameters-9)
     *   [setDockerVolumeData](#setdockervolumedata)
         *   [Parameters](#parameters-10)
+*   [Notification](#notification)
+    *   [setText](#settext)
+        *   [Parameters](#parameters-11)
+    *   [setLevel](#setlevel)
+        *   [Parameters](#parameters-12)
+    *   [setPersistent](#setpersistent)
+        *   [Parameters](#parameters-13)
+    *   [setFrom](#setfrom)
+        *   [Parameters](#parameters-14)
+    *   [addTo](#addto)
+        *   [Parameters](#parameters-15)
 *   [Readme](#readme)
-    *   [Parameters](#parameters-11)
+    *   [Parameters](#parameters-16)
 *   [Service](#service)
-    *   [Parameters](#parameters-12)
+    *   [Parameters](#parameters-17)
+    *   [send](#send)
+        *   [Parameters](#parameters-18)
 
 ### Extension
 
@@ -108,6 +121,40 @@ Represents a module.
 
 *   `dockerVolumeData` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The docker volume data of the extension.
 
+### Notification
+
+Represents a notification.
+
+#### setText
+
+##### Parameters
+
+*   `text` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The text of the notification.
+
+#### setLevel
+
+##### Parameters
+
+*   `level` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The level of the notification (low, normal, high, critical).
+
+#### setPersistent
+
+##### Parameters
+
+*   `persistent` **[Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** The persistence of the notification.
+
+#### setFrom
+
+##### Parameters
+
+*   `emitter` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The emitter of the notification.
+
+#### addTo
+
+##### Parameters
+
+*   `clientId` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The client target unique identifier of the notification.
+
 ### Readme
 
 Represents a readme.
@@ -125,4 +172,10 @@ Represents a service.
 #### Parameters
 
 *   `agentUrls` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)<[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>** The agent URLs.
-*   `modules` **([Module](#module) | [String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)<[Module](#module)>)** The modules (e.g. an extension).
+*   `modules` **([Module](#module) | [Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)<[Module](#module)>)** The modules (e.g. an extension).
+
+#### send
+
+##### Parameters
+
+*   `notifications` **([Notification](#notification) | [Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)<[Notification](#notification)>)** The notifications.
