@@ -1,7 +1,7 @@
 import crypto from "crypto";
 import WebSocket from "ws";
 import Module from "./module.js";
-import Notification from "./notification.js";
+import Message from "./message.js";
 import pkg from "./package.json" with { type: "json" };
 import yaml from "js-yaml";
 
@@ -94,20 +94,20 @@ export default class Service {
   }
 
   /**
-   * @param {Notification|Array<Notification>} notifications - The notifications.
+   * @param {Message|Array<Message>} messages - The messages.
    */
-  send(notifications) {
-    notifications = Array.isArray(notifications) ? notifications : [notifications];
+  send(messages) {
+    messages = Array.isArray(messages) ? messages : [messages];
     if (
-      !Array.isArray(notifications) ||
-      !notifications.every((item) => item instanceof Notification)
+      !Array.isArray(messages) ||
+      !messages.every((item) => item instanceof Message)
     ) {
-      throw new Error("notifications must be an array of Notification instances.");
+      throw new Error("messages must be an array of Message instances.");
     }
     for (const [url, socket] of this.#sockets) {
       socket.send(JSON.stringify({
-        type: 'notifications',
-        notifications: notifications.map(notification => notification.toJSON())
+        type: 'messages',
+        messages
       }));
     }
   }

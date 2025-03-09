@@ -1,61 +1,41 @@
+import Message from "./message.js";
+
+/**
+ * Represents levels for a notification.
+ * @enum {string}
+ */
+const Levels = Object.freeze({
+  LOW: 'low',
+  NORMAL: 'normal',
+  HIGH: 'high',
+  CRITICAL: 'critical',
+});
+
+
 /**
  * Represents a notification.
  * @class
  */
-export default class Notification {
+export default class Notification extends Message {
   #level = 'normal';
-  #persistent = false;
-  #text = null;
-  #from = null;
-  #tos = [];
 
   toJSON() {
     return {
+      ...super.toJSON(),
+      type: 'notification',
       level: this.#level,
-      persistent: this.#persistent,
-      text: this.#text,
-      from: this.#from,
-      tos: this.#tos,
     };
   }
 
   /**
-   * @param {String} text - The text of the notification.
-   */
-  setText(text) {
-    this.#text = text;
-    return this;
-  }
-
-  /**
    * @param {String} level - The level of the notification (low, normal, high, critical).
+   * @returns {Notification} The updated notification instance.
    */
   setLevel(level) {
+    if (!Object.values(Levels).includes(level)) {
+      throw new Error(`Invalid priority: ${level}`);
+    }
     this.#level = level;
-    return this;
-  }
-
-  /**
-   * @param {Boolean} persistent - The persistence of the notification.
-   */
-  setPersistent(persistent) {
-    this.#persistent = persistent;
-    return this;
-  }
-
-  /**
-   * @param {String} emitter - The emitter of the notification.
-   */
-  setFrom(emitter) {
-    this.#from = emitter;
-    return this;
-  }
-
-  /**
-   * @param {String} clientId - The client target unique identifier of the notification.
-   */
-  addTo(clientId) {
-    this.#tos.push(clientId);
     return this;
   }
 }
