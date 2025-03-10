@@ -1,25 +1,25 @@
-import Message from "./message.js";
+import Message from './message.js'
 
 const NotificationLevels = Object.freeze({
-  LOW: "low",
-  NORMAL: "normal",
-  HIGH: "high",
-  CRITICAL: "critical",
-});
+  LOW: 'low',
+  NORMAL: 'normal',
+  HIGH: 'high',
+  CRITICAL: 'critical',
+})
 
 /**
  * Represents a notification.
  * @class
  */
 export default class Notification extends Message {
-  #level = "normal";
+  #level = 'normal'
 
   toJSON() {
     return {
       ...super.toJSON(),
-      type: "notification",
+      type: 'notification',
       level: this.#level,
-    };
+    }
   }
 
   /**
@@ -28,9 +28,9 @@ export default class Notification extends Message {
    */
   setLevel(level) {
     if (!Object.values(NotificationLevels).includes(level)) {
-      throw new Error(`Invalid priority: ${level}`);
+      throw new Error(`Invalid priority: ${level}`)
     }
-    this.#level = level;
-    return this;
+    this.#level = level
+    return this
   }
 }

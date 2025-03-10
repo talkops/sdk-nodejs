@@ -10,7 +10,6 @@
     "js-yaml": "^4.1.0",
     "ws": "^8.18.0"
   },
-  "type": "module",
   "scripts": {
     "doc": "documentation readme *.js -s Documentation"
   },

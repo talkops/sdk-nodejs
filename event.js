@@ -3,14 +3,14 @@
  * @class
  */
 export default class Event {
-  #from = null;
-  #tos = [];
+  #from = null
+  #tos = []
 
   toJSON() {
     return {
       from: this.#from,
       tos: this.#tos,
-    };
+    }
   }
 
   /**
@@ -18,8 +18,8 @@ export default class Event {
    * @returns {Event} The updated event instance.
    */
   setFrom(emitter) {
-    this.#from = emitter;
-    return this;
+    this.#from = emitter
+    return this
   }
 
   /**
@@ -27,7 +27,7 @@ export default class Event {
    * @returns {Event} The updated event instance.
    */
   addTo(clientId) {
-    this.#tos.push(clientId);
-    return this;
+    this.#tos.push(clientId)
+    return this
   }
 }

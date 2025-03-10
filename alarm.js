@@ -1,4 +1,4 @@
-import Event from "./event.js";
+import Event from './event.js'
 
 /**
  * Represents an alarm.
@@ -9,6 +9,6 @@ export default class Alarm extends Event {
     return {
       ...super.toJSON(),
       type: 'alarm',
-    };
+    }
   }
 }

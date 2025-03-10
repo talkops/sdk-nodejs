@@ -1,18 +1,18 @@
-import Event from "./event.js";
+import Event from './event.js'
 
 /**
  * Represents a message.
  * @class
  */
 export default class Message extends Event {
-  #text = null;
+  #text = null
 
   toJSON() {
     return {
       ...super.toJSON(),
       text: this.#text,
       type: 'message',
-    };
+    }
   }
 
   /**
@@ -20,7 +20,7 @@ export default class Message extends Event {
    * @returns {Message} The updated message instance.
    */
   setText(text) {
-    this.#text = text;
-    return this;
+    this.#text = text
+    return this
   }
 }
