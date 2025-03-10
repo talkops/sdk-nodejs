@@ -123,10 +123,17 @@ export default class Module {
   }
 
   /**
-   * @param {String} dockerVolumeData - The docker volume data of the extension.
+   * Enable the docker volume data.
    */
-  setDockerVolumeData(dockerVolumeData) {
-    this.dockerVolumeData = dockerVolumeData;
+  enableDockerVolumeData() {
+    this.dockerVolumeData = true;
+  }
+
+  /**
+   * Disable the docker volume data.
+   */
+  disableDockerVolumeData() {
+    this.dockerVolumeData = false;
   }
 
   async resolve(arg) {

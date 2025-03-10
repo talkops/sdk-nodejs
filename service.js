@@ -1,7 +1,7 @@
 import crypto from "crypto";
 import WebSocket from "ws";
 import Module from "./module.js";
-import Message from "./message.js";
+import Event from "./event.js";
 import pkg from "./package.json" with { type: "json" };
 import yaml from "js-yaml";
 
@@ -94,21 +94,24 @@ export default class Service {
   }
 
   /**
-   * @param {Message|Array<Message>} messages - The messages.
+   * Send one or more events.
+   * @param {Event|Array<Event>} events - The events.
    */
-  send(messages) {
-    messages = Array.isArray(messages) ? messages : [messages];
+  send(events) {
+    events = Array.isArray(events) ? events : [events];
     if (
-      !Array.isArray(messages) ||
-      !messages.every((item) => item instanceof Message)
+      !Array.isArray(events) ||
+      !events.every((item) => item instanceof Event)
     ) {
-      throw new Error("messages must be an array of Message instances.");
+      throw new Error("events must be an array of Event instances.");
     }
     for (const [url, socket] of this.#sockets) {
-      socket.send(JSON.stringify({
-        type: 'messages',
-        messages
-      }));
+      socket.send(
+        JSON.stringify({
+          type: "events",
+          events,
+        })
+      );
     }
   }
 }

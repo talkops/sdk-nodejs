@@ -9,20 +9,21 @@ This software development kit is made to create [TalkOps](https://link.talkops.a
 #### Table of Contents
 
 *   [Alarm](#alarm)
-*   [Extension](#extension)
-    *   [Parameters](#parameters)
-    *   [setInstructions](#setinstructions)
+*   [Event](#event)
+    *   [setFrom](#setfrom)
+        *   [Parameters](#parameters)
+    *   [addTo](#addto)
         *   [Parameters](#parameters-1)
-    *   [setFunctionSchemas](#setfunctionschemas)
-        *   [Parameters](#parameters-2)
-    *   [setFunctions](#setfunctions)
+*   [Extension](#extension)
+    *   [Parameters](#parameters-2)
+    *   [setInstructions](#setinstructions)
         *   [Parameters](#parameters-3)
+    *   [setFunctionSchemas](#setfunctionschemas)
+        *   [Parameters](#parameters-4)
+    *   [setFunctions](#setfunctions)
+        *   [Parameters](#parameters-5)
 *   [Message](#message)
     *   [setText](#settext)
-        *   [Parameters](#parameters-4)
-    *   [setFrom](#setfrom)
-        *   [Parameters](#parameters-5)
-    *   [addTo](#addto)
         *   [Parameters](#parameters-6)
 *   [Module](#module)
     *   [Parameters](#parameters-7)
@@ -36,24 +37,43 @@ This software development kit is made to create [TalkOps](https://link.talkops.a
         *   [Parameters](#parameters-11)
     *   [setDockerRepository](#setdockerrepository)
         *   [Parameters](#parameters-12)
-    *   [setDockerVolumeData](#setdockervolumedata)
-        *   [Parameters](#parameters-13)
-*   [Levels](#levels)
+    *   [enableDockerVolumeData](#enabledockervolumedata)
+    *   [disableDockerVolumeData](#disabledockervolumedata)
 *   [Notification](#notification)
     *   [setLevel](#setlevel)
-        *   [Parameters](#parameters-14)
+        *   [Parameters](#parameters-13)
 *   [Readme](#readme)
-    *   [Parameters](#parameters-15)
+    *   [Parameters](#parameters-14)
 *   [Service](#service)
-    *   [Parameters](#parameters-16)
+    *   [Parameters](#parameters-15)
     *   [send](#send)
-        *   [Parameters](#parameters-17)
+        *   [Parameters](#parameters-16)
 
 ### Alarm
 
-**Extends Message**
+**Extends Event**
 
 Represents an alarm.
+
+### Event
+
+Represents an event.
+
+#### setFrom
+
+##### Parameters
+
+*   `emitter` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The emitter of the event.
+
+Returns **[Event](#event)** The updated event instance.
+
+#### addTo
+
+##### Parameters
+
+*   `clientId` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The client target unique identifier of the event.
+
+Returns **[Event](#event)** The updated event instance.
 
 ### Extension
 
@@ -85,6 +105,8 @@ Represents an extension.
 
 ### Message
 
+**Extends Event**
+
 Represents a message.
 
 #### setText
@@ -92,22 +114,6 @@ Represents a message.
 ##### Parameters
 
 *   `text` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The text of the message.
-
-Returns **[Message](#message)** The updated message instance.
-
-#### setFrom
-
-##### Parameters
-
-*   `emitter` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The emitter of the message.
-
-Returns **[Message](#message)** The updated message instance.
-
-#### addTo
-
-##### Parameters
-
-*   `clientId` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The client target unique identifier of the message.
 
 Returns **[Message](#message)** The updated message instance.
 
@@ -150,17 +156,13 @@ Represents a module.
 
 *   `dockerRepository` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The docker repository of the extension.
 
-#### setDockerVolumeData
+#### enableDockerVolumeData
 
-##### Parameters
+Enable the docker volume data.
 
-*   `dockerVolumeData` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The docker volume data of the extension.
+#### disableDockerVolumeData
 
-### Levels
-
-Represents levels for a notification.
-
-Type: [string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)
+Disable the docker volume data.
 
 ### Notification
 
@@ -197,6 +199,8 @@ Represents a service.
 
 #### send
 
+Send one or more events.
+
 ##### Parameters
 
-*   `messages` **([Message](#message) | [Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)<[Message](#message)>)** The messages.
+*   `events` **([Event](#event) | [Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)<[Event](#event)>)** The events.
