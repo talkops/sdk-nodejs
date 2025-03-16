@@ -30,7 +30,7 @@ export default class Extension {
    * @returns {Extension} The created extension instance.
    */
   constructor(token) {
-    token = token || process.argv[2] || process.env.TALKOPS_TOKEN
+    token = token || process.env.TALKOPS_TOKEN
     if (!token) {
       console.error('The token is required.')
       process.exit(1)
