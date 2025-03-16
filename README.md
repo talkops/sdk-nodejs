@@ -1,6 +1,6 @@
 # TalkOps SDK: NodeJS
 
-This software development kit is made to create [TalkOps](https://link.talkops.app/talkops) Extension.
+This software development kit is made to create [TalkOps](https://link.talkops.app/talkops) extensions using NodeJS.
 
 ## Documentation
 
@@ -16,38 +16,56 @@ This software development kit is made to create [TalkOps](https://link.talkops.a
         *   [Parameters](#parameters-1)
 *   [Extension](#extension)
     *   [Parameters](#parameters-2)
-    *   [setInstructions](#setinstructions)
+    *   [setName](#setname)
         *   [Parameters](#parameters-3)
-    *   [setFunctionSchemas](#setfunctionschemas)
+    *   [setVersion](#setversion)
         *   [Parameters](#parameters-4)
-    *   [setFunctions](#setfunctions)
+    *   [setSoftwareVersion](#setsoftwareversion)
         *   [Parameters](#parameters-5)
+    *   [setDescription](#setdescription)
+        *   [Parameters](#parameters-6)
+    *   [setFeatures](#setfeatures)
+        *   [Parameters](#parameters-7)
+    *   [setInstallationGuide](#setinstallationguide)
+        *   [Parameters](#parameters-8)
+    *   [setParameters](#setparameters)
+        *   [Parameters](#parameters-9)
+    *   [getParameterValues](#getparametervalues)
+    *   [setDockerRepository](#setdockerrepository)
+        *   [Parameters](#parameters-10)
+    *   [addError](#adderror)
+        *   [Parameters](#parameters-11)
+    *   [clearErrors](#clearerrors)
+    *   [setInstructions](#setinstructions)
+        *   [Parameters](#parameters-12)
+    *   [setFunctionSchemas](#setfunctionschemas)
+        *   [Parameters](#parameters-13)
+    *   [setFunctions](#setfunctions)
+        *   [Parameters](#parameters-14)
+    *   [send](#send)
+        *   [Parameters](#parameters-15)
+*   [setParameterValues](#setparametervalues)
+    *   [Parameters](#parameters-16)
 *   [Message](#message)
     *   [setText](#settext)
-        *   [Parameters](#parameters-6)
-*   [Module](#module)
-    *   [Parameters](#parameters-7)
-    *   [setVersion](#setversion)
-        *   [Parameters](#parameters-8)
-    *   [setDescription](#setdescription)
-        *   [Parameters](#parameters-9)
-    *   [setInstallationGuide](#setinstallationguide)
-        *   [Parameters](#parameters-10)
-    *   [setEnvironmentVariables](#setenvironmentvariables)
-        *   [Parameters](#parameters-11)
-    *   [setDockerRepository](#setdockerrepository)
-        *   [Parameters](#parameters-12)
-    *   [enableDockerVolumeData](#enabledockervolumedata)
-    *   [disableDockerVolumeData](#disabledockervolumedata)
+        *   [Parameters](#parameters-17)
 *   [Notification](#notification)
     *   [setLevel](#setlevel)
-        *   [Parameters](#parameters-13)
-*   [Readme](#readme)
-    *   [Parameters](#parameters-14)
-*   [Service](#service)
-    *   [Parameters](#parameters-15)
-    *   [send](#send)
-        *   [Parameters](#parameters-16)
+        *   [Parameters](#parameters-18)
+*   [Parameter](#parameter)
+    *   [Parameters](#parameters-19)
+    *   [setName](#setname-1)
+        *   [Parameters](#parameters-20)
+    *   [setDescription](#setdescription-1)
+        *   [Parameters](#parameters-21)
+    *   [setDefaultValue](#setdefaultvalue)
+        *   [Parameters](#parameters-22)
+    *   [setAvailableValues](#setavailablevalues)
+        *   [Parameters](#parameters-23)
+    *   [setPossibleValues](#setpossiblevalues)
+        *   [Parameters](#parameters-24)
+    *   [setMultipleValues](#setmultiplevalues)
+        *   [Parameters](#parameters-25)
 
 ### Alarm
 
@@ -77,31 +95,135 @@ Returns **[Event](#event)** The updated event instance.
 
 ### Extension
 
-**Extends Module**
-
 Represents an extension.
 
 #### Parameters
 
+*   `token` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The token of the extension.
+
+#### setName
+
+##### Parameters
+
 *   `name` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The name of the extension.
+
+Returns **[Extension](#extension)** The updated extension instance.
+
+#### setVersion
+
+##### Parameters
+
+*   `version` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The version of the extension.
+
+Returns **[Extension](#extension)** The updated extension instance.
+
+#### setSoftwareVersion
+
+##### Parameters
+
+*   `softwareVersion` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The version of the software.
+
+Returns **[Extension](#extension)** The updated extension instance.
+
+#### setDescription
+
+##### Parameters
+
+*   `description` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The description of the extension.
+
+Returns **[Extension](#extension)** The updated extension instance.
+
+#### setFeatures
+
+##### Parameters
+
+*   `features` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The features of the extension.
+
+Returns **[Extension](#extension)** The updated extension instance.
+
+#### setInstallationGuide
+
+##### Parameters
+
+*   `installationGuide` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The installation guide of the extension.
+
+Returns **[Extension](#extension)** The updated extension instance.
+
+#### setParameters
+
+##### Parameters
+
+*   `parameters` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)<[Parameter](#parameter)>** The parameters of the extension.
+
+Returns **[Extension](#extension)** The updated extension instance.
+
+#### getParameterValues
+
+Returns **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** The parameter values of the extension.
+
+#### setDockerRepository
+
+##### Parameters
+
+*   `dockerRepository` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The docker repository of the extension.
+
+Returns **[Extension](#extension)** The updated extension instance.
+
+#### addError
+
+Add an error.
+
+##### Parameters
+
+*   `error` &#x20;
+
+Returns **[Extension](#extension)** The updated extension instance.
+
+#### clearErrors
+
+Clear errors.
+
+Returns **[Extension](#extension)** The updated extension instance.
 
 #### setInstructions
 
 ##### Parameters
 
-*   `instructions` **([String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String) | [Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)<[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)> | [Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function) | AsyncFunction)** The instructions of the extension for the AI agent.
+*   `instructions` **([String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String) | [Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)<[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)> | [Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function))** The instructions of the extension for the AI agent.
+
+Returns **[Extension](#extension)** The updated extension instance.
 
 #### setFunctionSchemas
 
 ##### Parameters
 
-*   `functionSchemas` **([Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)<[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)> | [Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function) | AsyncFunction)** The function schemas of the extension for the AI agent.
+*   `functionSchemas` **([Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)<[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)> | [Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function))** The function schemas of the extension for the AI agent.
+
+Returns **[Extension](#extension)** The updated extension instance.
 
 #### setFunctions
 
 ##### Parameters
 
-*   `functions` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)<([Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function) | AsyncFunction)>** The named functions of the extension.
+*   `functions` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)<[Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)>** The named functions of the extension.
+
+Returns **[Extension](#extension)** The updated extension instance.
+
+#### send
+
+Send one or more events.
+
+##### Parameters
+
+*   `events` **([Event](#event) | [Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)<[Event](#event)>)** The events.
+
+### setParameterValues
+
+#### Parameters
+
+*   `parameterValues` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** The parameter values of the extension.
+
+Returns **[Extension](#extension)** The updated extension instance.
 
 ### Message
 
@@ -117,53 +239,6 @@ Represents a message.
 
 Returns **[Message](#message)** The updated message instance.
 
-### Module
-
-Represents a module.
-
-#### Parameters
-
-*   `name` &#x20;
-*   `type` &#x20;
-
-#### setVersion
-
-##### Parameters
-
-*   `version` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The version of the module.
-
-#### setDescription
-
-##### Parameters
-
-*   `description` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The description of the module.
-
-#### setInstallationGuide
-
-##### Parameters
-
-*   `installationGuide` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The installation guide of the module.
-
-#### setEnvironmentVariables
-
-##### Parameters
-
-*   `environmentVariables` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)<[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)>** The environment variables of the extension.
-
-#### setDockerRepository
-
-##### Parameters
-
-*   `dockerRepository` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The docker repository of the extension.
-
-#### enableDockerVolumeData
-
-Enable the docker volume data.
-
-#### disableDockerVolumeData
-
-Disable the docker volume data.
-
 ### Notification
 
 **Extends Message**
@@ -178,29 +253,58 @@ Represents a notification.
 
 Returns **[Notification](#notification)** The updated notification instance.
 
-### Readme
+### Parameter
 
-Represents a readme.
-
-#### Parameters
-
-*   `templateUrl` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The template URL.
-*   `path` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The path of the readme file.
-*   `module` **[Module](#module)** The module (e.g. an extension).
-
-### Service
-
-Represents a service.
+Represents a parameter.
 
 #### Parameters
 
-*   `agentUrls` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)<[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>** The agent URLs.
-*   `modules` **([Module](#module) | [Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)<[Module](#module)>)** The modules (e.g. an extension).
+*   `name` &#x20;
 
-#### send
-
-Send one or more events.
+#### setName
 
 ##### Parameters
 
-*   `events` **([Event](#event) | [Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)<[Event](#event)>)** The events.
+*   `name` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The name of the parameter.
+
+Returns **[Parameter](#parameter)** The updated parameter instance.
+
+#### setDescription
+
+##### Parameters
+
+*   `description` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The description of the parameter.
+
+Returns **[Parameter](#parameter)** The updated parameter instance.
+
+#### setDefaultValue
+
+##### Parameters
+
+*   `defaultValue` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The default value of the parameter.
+
+Returns **[Parameter](#parameter)** The updated parameter instance.
+
+#### setAvailableValues
+
+##### Parameters
+
+*   `availableValues` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)** The available values of the parameter.
+
+Returns **[Parameter](#parameter)** The updated parameter instance.
+
+#### setPossibleValues
+
+##### Parameters
+
+*   `possibleValues` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)** The possible values of the parameter.
+
+Returns **[Parameter](#parameter)** The updated parameter instance.
+
+#### setMultipleValues
+
+##### Parameters
+
+*   `multipleValues` **[Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** Useful to specify if the parameter supports multiple values.
+
+Returns **[Parameter](#parameter)** The updated parameter instance.

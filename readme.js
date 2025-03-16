@@ -1,38 +1,22 @@
-import axios from 'axios'
 import fs from 'fs'
 import ejs from 'ejs'
-import Module from './module.js'
+import { fileURLToPath } from 'url'
+import { dirname } from 'path'
 
-/**
- * Represents a readme.
- * @class
- */
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
+
 export default class Readme {
-  /**
-   * @param {String} templateUrl - The template URL.
-   * @param {String} path - The path of the readme file.
-   * @param {Module} module - The module (e.g. an extension).
-   */
-  constructor(templateUrl, path, module) {
-    if (!(module instanceof Module)) {
-      throw new Error('module must be a Module instance.')
-    }
-    this.templateUrl = templateUrl
-    this.path = path
-    this.module = module
-    this.#generate()
+  #getter = null
+
+  constructor(getter) {
+    this.#getter = getter
+    setTimeout(() => this.#generate(), 500)
   }
 
-  async #generate() {
-    try {
-      const response = await axios.get(this.templateUrl)
-      const template = response.data
-      const output = ejs.render(template, { module: this.module })
-
-      await fs.promises.writeFile(this.path, output)
-      console.log('Readme', 'generated')
-    } catch (err) {
-      console.error('Readme', err)
-    }
+  #generate() {
+    const template = fs.readFileSync(`${__dirname}/readme.ejs`, 'utf8')
+    const output = ejs.render(template, { extension: this.#getter() })
+    fs.writeFileSync('/app/README.md', output, 'utf8')
   }
 }

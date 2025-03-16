@@ -1,0 +1,22 @@
+# TalkOps Extension: <%= extension.name %>
+<% if (extension.dockerRepository && (extension.dockerRepository.match(/\//g) || []).length === 1) { -%>
+![Docker Pulls](https://img.shields.io/docker/pulls/<%= extension.dockerRepository %>)
+<% } -%>
+
+A TalkOps Extension made to work with [TalkOps](https://link.talkops.app/talkops).
+
+<% if (extension.description) { -%>
+<%= extension.description.trim() %>
+<% } -%>
+
+<% if (extension.features) { -%>
+## Features
+
+<%= extension.features.trim() %>
+<% } -%>
+
+## Installation
+
+Open [TalkOps](https://link.talkops.app/talkops).
+Search for `<%= extension.name %>` extension.
+Follow the instructions.
