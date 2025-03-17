@@ -11,6 +11,7 @@ import pkg from './package.json' with { type: 'json' }
  */
 export default class Extension {
   #name = null
+  #icon = null
   #version = null
   #softwareVersion = null
   #description = null
@@ -52,12 +53,16 @@ export default class Extension {
         functionSchemas: this.#functionSchemas,
       }
     })
-    new Subscriber(mercure, () => {
-      return {
-        functions: this.#functions,
-        setParameterValues: this.#setParameterValues,
-      }
-    })
+    new Subscriber(
+      mercure,
+      () => {
+        return {
+          functions: this.#functions,
+          setParameterValues: this.#setParameterValues,
+        }
+      },
+      this.#publisher,
+    )
 
     if (process.env.NODE_ENV === 'development' || false) {
       new Readme(() => {
@@ -71,11 +76,14 @@ export default class Extension {
       new Manifest(() => {
         return {
           name: this.#name,
-          versions: {
-            extension: this.#version,
-            sdk: `${pkg.version}-nodejs`,
-          },
+          icon: this.#icon,
+          version: this.#version,
           description: this.#description,
+          sdk: {
+            name: 'nodejs',
+            version: pkg.version,
+          },
+          dockerRepository: this.#dockerRepository,
           installationGuide: this.#installationGuide,
         }
       })
@@ -91,6 +99,23 @@ export default class Extension {
       throw new Error('name is required and must be a non-empty string.')
     }
     this.#name = name
+    return this
+  }
+
+  /**
+   * @param {String} icon - The icon url of the extension.
+   * @returns {Extension} The updated extension instance.
+   */
+  setIcon(icon) {
+    if (typeof icon !== 'string' || icon.trim() === '') {
+      throw new Error('icon is required and must be a non-empty string.')
+    }
+    try {
+      new URL(icon)
+    } catch (_) {
+      throw new Error('icon must be a valid URL.')
+    }
+    this.#icon = icon
     return this
   }
 

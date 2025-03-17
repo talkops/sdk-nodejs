@@ -20,6 +20,7 @@ export default class Publisher {
   }
 
   async publishEvent(event) {
+    console.log('Publisher#publishEvent', event.type)
     await axios.post(
       this.#url,
       new URLSearchParams({
