@@ -1,7 +1,7 @@
 {
   "name": "talkops",
   "description": "TalkOps SDK",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "author": "bierdok",
   "license": "MIT",
   "dependencies": {
@@ -14,5 +14,6 @@
   },
   "devDependencies": {
     "documentation": "^14.0.3"
-  }
+  },
+  "type": "module"
 }
