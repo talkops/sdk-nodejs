@@ -10,20 +10,22 @@ import pkg from './package.json' with { type: 'json' }
  * @class
  */
 export default class Extension {
-  #name = null
+  #categories = []
+  #dockerRepository = null
   #icon = null
+  #instructions = null
+  #name = null
   #version = null
-  #softwareVersion = null
-  #description = null
-  #installationGuide = null
+  #errors = []
   #features = []
+  #functions = []
+  #functionSchemas = []
+  #installationSteps = []
   #parameters = []
   #parameterValues = {}
-  #dockerRepository = null
-  #errors = []
-  #instructions = null
-  #functionSchemas = []
-  #functions = []
+  #softwareVersion = null
+  #website = null
+
   #publisher = null
 
   /**
@@ -39,17 +41,16 @@ export default class Extension {
     const mercure = JSON.parse(Buffer.from(token, 'base64').toString())
     this.#publisher = new Publisher(mercure, () => {
       return {
+        instructions: this.#instructions,
         name: this.#name,
         sdk: {
           name: 'nodejs',
           version: pkg.version,
         },
-        version: this.#version,
         softwareVersion: this.#softwareVersion,
-        dockerRepository: this.#dockerRepository,
+        version: this.#version,
         errors: this.#errors,
         parameters: this.#parameters,
-        instructions: this.#instructions,
         functionSchemas: this.#functionSchemas,
       }
     })
@@ -64,27 +65,28 @@ export default class Extension {
       this.#publisher,
     )
 
-    if (process.env.NODE_ENV === 'development' || false) {
+    if (process.env.NODE_ENV && process.env.NODE_ENV === 'development') {
       new Readme(() => {
         return {
-          name: this.#name,
           dockerRepository: this.#dockerRepository,
-          description: this.#description,
           features: this.#features,
+          name: this.#name,
         }
       })
       new Manifest(() => {
         return {
-          name: this.#name,
+          categories: this.#categories,
+          dockerRepository: this.#dockerRepository,
+          features: this.#features,
           icon: this.#icon,
-          version: this.#version,
-          description: this.#description,
+          installationSteps: this.#installationSteps,
+          name: this.#name,
           sdk: {
             name: 'nodejs',
             version: pkg.version,
           },
-          dockerRepository: this.#dockerRepository,
-          installationGuide: this.#installationGuide,
+          version: this.#version,
+          website: this.#website,
         }
       })
     }
@@ -120,6 +122,23 @@ export default class Extension {
   }
 
   /**
+   * @param {String} website - The website url of the extension.
+   * @returns {Extension} The updated extension instance.
+   */
+  setWebsite(website) {
+    if (typeof website !== 'string' || website.trim() === '') {
+      throw new Error('website is required and must be a non-empty string.')
+    }
+    try {
+      new URL(website)
+    } catch (_) {
+      throw new Error('website must be a valid URL.')
+    }
+    this.#website = website
+    return this
+  }
+
+  /**
    * @param {String} version - The version of the extension.
    * @returns {Extension} The updated extension instance.
    */
@@ -138,29 +157,41 @@ export default class Extension {
   }
 
   /**
-   * @param {String} description - The description of the extension.
+   * @param {Array<String>} categories - The categories of the extension.
    * @returns {Extension} The updated extension instance.
    */
-  setDescription(description) {
-    this.#description = description
+  setCategories(categories) {
+    if (!Array.isArray(categories) || !categories.every((f) => typeof f === 'string')) {
+      throw new TypeError('categories must be an array of strings')
+    }
+    this.#categories = categories
     return this
   }
 
   /**
-   * @param {String} features - The features of the extension.
+   * @param {Array<String>} features - The features of the extension.
    * @returns {Extension} The updated extension instance.
    */
   setFeatures(features) {
+    if (!Array.isArray(features) || !features.every((f) => typeof f === 'string')) {
+      throw new TypeError('features must be an array of strings')
+    }
     this.#features = features
     return this
   }
 
   /**
-   * @param {String} installationGuide - The installation guide of the extension.
+   * @param {Array<String>} installationSteps - The installation steps of the extension.
    * @returns {Extension} The updated extension instance.
    */
-  setInstallationGuide(installationGuide) {
-    this.#installationGuide = installationGuide
+  setinstallationSteps(installationSteps) {
+    if (
+      !Array.isArray(installationSteps) ||
+      !installationSteps.every((f) => typeof f === 'string')
+    ) {
+      throw new TypeError('installationSteps must be an array of strings')
+    }
+    this.#installationSteps = installationSteps
     return this
   }
 
@@ -194,7 +225,7 @@ export default class Extension {
    * @returns {Extension} The updated extension instance.
    */
   setDockerRepository(dockerRepository) {
-    this.dockerRepository = dockerRepository
+    this.#dockerRepository = dockerRepository
     return this
   }
 

@@ -3,20 +3,19 @@
 ![Docker Pulls](https://img.shields.io/docker/pulls/<%= extension.dockerRepository %>)
 <% } -%>
 
-A TalkOps Extension made to work with [TalkOps](https://link.talkops.app/talkops).
-
-<% if (extension.description) { -%>
-<%= extension.description.trim() %>
-<% } -%>
+A TalkOps Extension made to work with [TalkOps](https://talkops.app/#talkops).
+TalkOps enables real-time voice interaction with applications.
 
 <% if (extension.features) { -%>
 ## Features
 
-<%= extension.features.trim() %>
+<% for (feature of extension.features) { -%>
+<%= feature.trim() %>
+<% } -%>
 <% } -%>
 
 ## Installation
 
-Open [TalkOps](https://link.talkops.app/talkops).
-Search for `<%= extension.name %>` extension.
-Follow the instructions.
+1. Sign in to [TalkOps](https://talkops.app/#talkops).
+2. Search for the `<%= extension.name %>` extension.
+3. Add the extension and follow the instructions.

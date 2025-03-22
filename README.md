@@ -1,6 +1,6 @@
 # TalkOps SDK: NodeJS
 
-This software development kit is made to create [TalkOps](https://link.talkops.app/talkops) extensions using NodeJS.
+This software development kit is made to create [TalkOps](https://talkops.app/#talkops) extensions using NodeJS.
 
 ## Documentation
 
@@ -18,54 +18,58 @@ This software development kit is made to create [TalkOps](https://link.talkops.a
     *   [Parameters](#parameters-2)
     *   [setName](#setname)
         *   [Parameters](#parameters-3)
-    *   [setVersion](#setversion)
+    *   [setIcon](#seticon)
         *   [Parameters](#parameters-4)
-    *   [setSoftwareVersion](#setsoftwareversion)
+    *   [setWebsite](#setwebsite)
         *   [Parameters](#parameters-5)
-    *   [setDescription](#setdescription)
+    *   [setVersion](#setversion)
         *   [Parameters](#parameters-6)
-    *   [setFeatures](#setfeatures)
+    *   [setSoftwareVersion](#setsoftwareversion)
         *   [Parameters](#parameters-7)
-    *   [setInstallationGuide](#setinstallationguide)
+    *   [setCategories](#setcategories)
         *   [Parameters](#parameters-8)
-    *   [setParameters](#setparameters)
+    *   [setFeatures](#setfeatures)
         *   [Parameters](#parameters-9)
+    *   [setinstallationSteps](#setinstallationsteps)
+        *   [Parameters](#parameters-10)
+    *   [setParameters](#setparameters)
+        *   [Parameters](#parameters-11)
     *   [getParameterValues](#getparametervalues)
     *   [setDockerRepository](#setdockerrepository)
-        *   [Parameters](#parameters-10)
+        *   [Parameters](#parameters-12)
     *   [addError](#adderror)
-        *   [Parameters](#parameters-11)
+        *   [Parameters](#parameters-13)
     *   [clearErrors](#clearerrors)
     *   [setInstructions](#setinstructions)
-        *   [Parameters](#parameters-12)
-    *   [setFunctionSchemas](#setfunctionschemas)
-        *   [Parameters](#parameters-13)
-    *   [setFunctions](#setfunctions)
         *   [Parameters](#parameters-14)
-    *   [send](#send)
+    *   [setFunctionSchemas](#setfunctionschemas)
         *   [Parameters](#parameters-15)
+    *   [setFunctions](#setfunctions)
+        *   [Parameters](#parameters-16)
+    *   [send](#send)
+        *   [Parameters](#parameters-17)
 *   [setParameterValues](#setparametervalues)
-    *   [Parameters](#parameters-16)
+    *   [Parameters](#parameters-18)
 *   [Message](#message)
     *   [setText](#settext)
-        *   [Parameters](#parameters-17)
+        *   [Parameters](#parameters-19)
 *   [Notification](#notification)
     *   [setLevel](#setlevel)
-        *   [Parameters](#parameters-18)
-*   [Parameter](#parameter)
-    *   [Parameters](#parameters-19)
-    *   [setName](#setname-1)
         *   [Parameters](#parameters-20)
-    *   [setDescription](#setdescription-1)
-        *   [Parameters](#parameters-21)
-    *   [setDefaultValue](#setdefaultvalue)
+*   [Parameter](#parameter)
+    *   [Parameters](#parameters-21)
+    *   [setName](#setname-1)
         *   [Parameters](#parameters-22)
-    *   [setAvailableValues](#setavailablevalues)
+    *   [setDescription](#setdescription)
         *   [Parameters](#parameters-23)
-    *   [setPossibleValues](#setpossiblevalues)
+    *   [setDefaultValue](#setdefaultvalue)
         *   [Parameters](#parameters-24)
-    *   [setMultipleValues](#setmultiplevalues)
+    *   [setAvailableValues](#setavailablevalues)
         *   [Parameters](#parameters-25)
+    *   [setPossibleValues](#setpossiblevalues)
+        *   [Parameters](#parameters-26)
+    *   [setMultipleValues](#setmultiplevalues)
+        *   [Parameters](#parameters-27)
 
 ### Alarm
 
@@ -109,6 +113,22 @@ Represents an extension.
 
 Returns **[Extension](#extension)** The updated extension instance.
 
+#### setIcon
+
+##### Parameters
+
+*   `icon` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The icon url of the extension.
+
+Returns **[Extension](#extension)** The updated extension instance.
+
+#### setWebsite
+
+##### Parameters
+
+*   `website` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The website url of the extension.
+
+Returns **[Extension](#extension)** The updated extension instance.
+
 #### setVersion
 
 ##### Parameters
@@ -125,11 +145,11 @@ Returns **[Extension](#extension)** The updated extension instance.
 
 Returns **[Extension](#extension)** The updated extension instance.
 
-#### setDescription
+#### setCategories
 
 ##### Parameters
 
-*   `description` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The description of the extension.
+*   `categories` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)<[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>** The categories of the extension.
 
 Returns **[Extension](#extension)** The updated extension instance.
 
@@ -137,15 +157,15 @@ Returns **[Extension](#extension)** The updated extension instance.
 
 ##### Parameters
 
-*   `features` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The features of the extension.
+*   `features` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)<[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>** The features of the extension.
 
 Returns **[Extension](#extension)** The updated extension instance.
 
-#### setInstallationGuide
+#### setinstallationSteps
 
 ##### Parameters
 
-*   `installationGuide` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The installation guide of the extension.
+*   `installationSteps` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)<[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>** The installation steps of the extension.
 
 Returns **[Extension](#extension)** The updated extension instance.
 
