@@ -11,6 +11,7 @@ import pkg from './package.json' with { type: 'json' }
  */
 export default class Extension {
   #categories = []
+  #debug = false
   #dockerRepository = null
   #icon = null
   #instructions = null
@@ -37,6 +38,7 @@ export default class Extension {
       const mercure = JSON.parse(Buffer.from(token, 'base64').toString())
       this.#publisher = new Publisher(mercure, () => {
         return {
+          debug: this.#debug,
           instructions: this.#instructions,
           name: this.#name,
           sdk: {
@@ -54,6 +56,7 @@ export default class Extension {
         mercure,
         () => {
           return {
+            debug: this.#debug,
             functions: this.#functions,
             parameters: this.#parameters,
           }
@@ -87,6 +90,11 @@ export default class Extension {
         }
       })
     }
+  }
+
+  enableDebug() {
+    this.#debug = true
+    return this
   }
 
   /**

@@ -30,7 +30,8 @@ export default class Subscriber {
   }
 
   async #onEvent(event) {
-    console.log('Subscriber#onEvent', event.type)
+    const extension = this.#useExtension()
+    extension.debug && console.log('sub', event.type)
     if (event.type === 'request_state') {
       this.#publisher.resetData()
     }

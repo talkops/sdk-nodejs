@@ -20,7 +20,8 @@ export default class Publisher {
   }
 
   async publishEvent(event) {
-    console.log('Publisher#publishEvent', event.type)
+    const extension = this.#useExtension()
+    extension.debug && console.log('pub', event.type)
     await axios.post(
       this.#url,
       new URLSearchParams({
@@ -37,7 +38,8 @@ export default class Publisher {
   }
 
   async #publishState() {
-    const event = { type: 'state', state: this.#useExtension() }
+    const extension = this.#useExtension()
+    const event = { type: 'state', extension }
     const data = JSON.stringify(event)
     if (this.#data !== data) {
       await this.publishEvent(event)
