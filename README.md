@@ -34,42 +34,43 @@ This software development kit is made to create [TalkOps](https://talkops.app/#t
         *   [Parameters](#parameters-10)
     *   [setParameters](#setparameters)
         *   [Parameters](#parameters-11)
-    *   [getParameterValues](#getparametervalues)
-    *   [setDockerRepository](#setdockerrepository)
+    *   [getParameterValue](#getparametervalue)
         *   [Parameters](#parameters-12)
-    *   [addError](#adderror)
+    *   [setDockerRepository](#setdockerrepository)
         *   [Parameters](#parameters-13)
+    *   [addError](#adderror)
+        *   [Parameters](#parameters-14)
     *   [clearErrors](#clearerrors)
     *   [setInstructions](#setinstructions)
-        *   [Parameters](#parameters-14)
-    *   [setFunctionSchemas](#setfunctionschemas)
         *   [Parameters](#parameters-15)
-    *   [setFunctions](#setfunctions)
+    *   [setFunctionSchemas](#setfunctionschemas)
         *   [Parameters](#parameters-16)
-    *   [send](#send)
+    *   [setFunctions](#setfunctions)
         *   [Parameters](#parameters-17)
+    *   [send](#send)
+        *   [Parameters](#parameters-18)
 *   [setParameterValues](#setparametervalues)
-    *   [Parameters](#parameters-18)
+    *   [Parameters](#parameters-19)
 *   [Message](#message)
     *   [setText](#settext)
-        *   [Parameters](#parameters-19)
+        *   [Parameters](#parameters-20)
 *   [Notification](#notification)
     *   [setLevel](#setlevel)
-        *   [Parameters](#parameters-20)
+        *   [Parameters](#parameters-21)
 *   [Parameter](#parameter)
-    *   [Parameters](#parameters-21)
+    *   [Parameters](#parameters-22)
     *   [setName](#setname-1)
-        *   [Parameters](#parameters-22)
-    *   [setDescription](#setdescription)
         *   [Parameters](#parameters-23)
-    *   [setDefaultValue](#setdefaultvalue)
+    *   [setDescription](#setdescription)
         *   [Parameters](#parameters-24)
-    *   [setAvailableValues](#setavailablevalues)
+    *   [setDefaultValue](#setdefaultvalue)
         *   [Parameters](#parameters-25)
-    *   [setPossibleValues](#setpossiblevalues)
+    *   [setAvailableValues](#setavailablevalues)
         *   [Parameters](#parameters-26)
-    *   [setMultipleValues](#setmultiplevalues)
+    *   [setPossibleValues](#setpossiblevalues)
         *   [Parameters](#parameters-27)
+    *   [setMultipleValues](#setmultiplevalues)
+        *   [Parameters](#parameters-28)
 
 ### Alarm
 
@@ -177,9 +178,13 @@ Returns **[Extension](#extension)** The updated extension instance.
 
 Returns **[Extension](#extension)** The updated extension instance.
 
-#### getParameterValues
+#### getParameterValue
 
-Returns **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** The parameter values of the extension.
+##### Parameters
+
+*   `name` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The name of the parameter.
+
+Returns **([String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String) | [Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)<[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>)** The value(s) of the parameter.
 
 #### setDockerRepository
 

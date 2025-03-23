@@ -214,10 +214,22 @@ export default class Extension {
   }
 
   /**
-   * @returns {Object} The parameter values of the extension.
+   * @param {String} name - The name of the parameter.
+   * @returns {String|Array<String>} The value(s) of the parameter.
    */
-  getParameterValues() {
-    return this.#parameterValues
+  getParameterValue(name) {
+    for (const parameter of this.#parameters) {
+      const parameterJson = parameter.toJSON()
+      if (parameterJson.name !== name) continue
+      if (process.env[name] !== undefined) {
+        return parameterJson.multipleValues ? process.env[name].split(',') : process.env[name]
+      }
+      if (this.#parameterValues[name] !== undefined) {
+        return this.#parameterValues[name]
+      }
+      return parameterJson.defaultValue ?? null
+    }
+    return null
   }
 
   /**
