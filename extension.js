@@ -22,7 +22,6 @@ export default class Extension {
   #functionSchemas = []
   #installationSteps = []
   #parameters = []
-  #parameterValues = {}
   #softwareVersion = null
   #website = null
 
@@ -213,9 +212,13 @@ export default class Extension {
 
   /**
    * Add an error.
+   * @param {String} error - The error message.
    * @returns {Extension} The updated extension instance.
    */
   addError(error) {
+    if (typeof error !== 'string' || error.trim() === '') {
+      throw new Error('error must be a non-empty string.')
+    }
     this.#errors.push(error)
     return this
   }
@@ -230,28 +233,37 @@ export default class Extension {
   }
 
   /**
-   * @param {String|Array<String>|Function} instructions - The instructions of the extension for the AI agent.
+   * @param {String} instructions - The instructions of the extension.
    * @returns {Extension} The updated extension instance.
    */
-  async setInstructions(instructions) {
-    this.#instructions = await this.#resolveToString(instructions)
+  setInstructions(instructions) {
+    if (typeof instructions !== 'string' || instructions.trim() === '') {
+      throw new Error('instructions must be a non-empty string.')
+    }
+    this.#instructions = instructions
     return this
   }
 
   /**
-   * @param {Array<Object>|Function} functionSchemas - The function schemas of the extension for the AI agent.
+   * @param {Array<Object>} functionSchemas - The function schemas of the extension.
    * @returns {Extension} The updated extension instance.
    */
-  async setFunctionSchemas(functionSchemas) {
-    this.#functionSchemas = await this.#resolve(functionSchemas)
+  setFunctionSchemas(functionSchemas) {
+    if (!Array.isArray(functionSchemas) || functionSchemas.length === 0) {
+      throw new Error('functionSchemas must be a non-empty array.')
+    }
+    if (!functionSchemas.every((schema) => typeof schema === 'object' && schema !== null)) {
+      throw new Error('Each item in functionSchemas must be a non-null object.')
+    }
+    this.#functionSchemas = functionSchemas
     return this
   }
 
   /**
-   * @param {Array<Function>} functions - The named functions of the extension.
+   * @param {Array<Function>} functions - The functions of the extension.
    * @returns {Extension} The updated extension instance.
    */
-  async setFunctions(functions) {
+  setFunctions(functions) {
     if (
       !Array.isArray(functions) ||
       !this.#functions.every((fn) => typeof fn === 'function') ||
@@ -275,24 +287,5 @@ export default class Extension {
     for (const event of events) {
       this.#publisher.publishEvent(event.toJSON())
     }
-  }
-
-  async #resolve(arg) {
-    if (arg === undefined) return undefined
-    if (arg.constructor.name === 'AsyncFunction') {
-      arg = await arg()
-    } else if (arg.constructor.name === 'Function') {
-      arg = arg()
-    }
-    return arg
-  }
-
-  async #resolveToString(arg) {
-    if (arg === undefined) return ''
-    arg = await this.#resolve(arg)
-    if (arg.constructor.name === 'Array') {
-      arg = arg.join('\n')
-    }
-    return String(arg).trim()
   }
 }

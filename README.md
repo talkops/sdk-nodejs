@@ -1,6 +1,6 @@
 # TalkOps SDK: NodeJS
 
-This software development kit is made to create [TalkOps](https://talkops.app/#talkops) extensions using NodeJS.
+This software development kit is made to create [TalkOps](https://talkops.app) extensions using NodeJS.
 
 ## Documentation
 
@@ -188,7 +188,7 @@ Add an error.
 
 ##### Parameters
 
-*   `error` &#x20;
+*   `error` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The error message.
 
 Returns **[Extension](#extension)** The updated extension instance.
 
@@ -202,7 +202,7 @@ Returns **[Extension](#extension)** The updated extension instance.
 
 ##### Parameters
 
-*   `instructions` **([String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String) | [Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)<[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)> | [Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function))** The instructions of the extension for the AI agent.
+*   `instructions` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The instructions of the extension.
 
 Returns **[Extension](#extension)** The updated extension instance.
 
@@ -210,7 +210,7 @@ Returns **[Extension](#extension)** The updated extension instance.
 
 ##### Parameters
 
-*   `functionSchemas` **([Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)<[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)> | [Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function))** The function schemas of the extension for the AI agent.
+*   `functionSchemas` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)<[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)>** The function schemas of the extension.
 
 Returns **[Extension](#extension)** The updated extension instance.
 
@@ -218,7 +218,7 @@ Returns **[Extension](#extension)** The updated extension instance.
 
 ##### Parameters
 
-*   `functions` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)<[Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)>** The named functions of the extension.
+*   `functions` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)<[Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)>** The functions of the extension.
 
 Returns **[Extension](#extension)** The updated extension instance.
 

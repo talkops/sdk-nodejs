@@ -59,7 +59,7 @@ export default class Parameter {
    * @returns {String} The value of the parameter.
    */
   getValue() {
-    return process.env[this.#name] ?? this.#value
+    return process.env[this.#name] ?? (this.#value || this.#defaultValue)
   }
 
   /**
