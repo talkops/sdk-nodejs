@@ -34,43 +34,39 @@ This software development kit is made to create [TalkOps](https://talkops.app/#t
         *   [Parameters](#parameters-10)
     *   [setParameters](#setparameters)
         *   [Parameters](#parameters-11)
-    *   [getParameterValue](#getparametervalue)
-        *   [Parameters](#parameters-12)
     *   [setDockerRepository](#setdockerrepository)
-        *   [Parameters](#parameters-13)
+        *   [Parameters](#parameters-12)
     *   [addError](#adderror)
-        *   [Parameters](#parameters-14)
+        *   [Parameters](#parameters-13)
     *   [clearErrors](#clearerrors)
     *   [setInstructions](#setinstructions)
-        *   [Parameters](#parameters-15)
+        *   [Parameters](#parameters-14)
     *   [setFunctionSchemas](#setfunctionschemas)
-        *   [Parameters](#parameters-16)
+        *   [Parameters](#parameters-15)
     *   [setFunctions](#setfunctions)
-        *   [Parameters](#parameters-17)
+        *   [Parameters](#parameters-16)
     *   [send](#send)
-        *   [Parameters](#parameters-18)
-*   [setParameterValues](#setparametervalues)
-    *   [Parameters](#parameters-19)
+        *   [Parameters](#parameters-17)
 *   [Message](#message)
     *   [setText](#settext)
-        *   [Parameters](#parameters-20)
+        *   [Parameters](#parameters-18)
 *   [Notification](#notification)
     *   [setLevel](#setlevel)
-        *   [Parameters](#parameters-21)
+        *   [Parameters](#parameters-19)
 *   [Parameter](#parameter)
-    *   [Parameters](#parameters-22)
-    *   [setName](#setname-1)
-        *   [Parameters](#parameters-23)
+    *   [Parameters](#parameters-20)
+    *   [getName](#getname)
     *   [setDescription](#setdescription)
-        *   [Parameters](#parameters-24)
+        *   [Parameters](#parameters-21)
     *   [setDefaultValue](#setdefaultvalue)
-        *   [Parameters](#parameters-25)
+        *   [Parameters](#parameters-22)
+    *   [getValue](#getvalue)
+    *   [setValue](#setvalue)
+        *   [Parameters](#parameters-23)
     *   [setAvailableValues](#setavailablevalues)
-        *   [Parameters](#parameters-26)
+        *   [Parameters](#parameters-24)
     *   [setPossibleValues](#setpossiblevalues)
-        *   [Parameters](#parameters-27)
-    *   [setMultipleValues](#setmultiplevalues)
-        *   [Parameters](#parameters-28)
+        *   [Parameters](#parameters-25)
 
 ### Alarm
 
@@ -178,14 +174,6 @@ Returns **[Extension](#extension)** The updated extension instance.
 
 Returns **[Extension](#extension)** The updated extension instance.
 
-#### getParameterValue
-
-##### Parameters
-
-*   `name` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The name of the parameter.
-
-Returns **([String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String) | [Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)<[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>)** The value(s) of the parameter.
-
 #### setDockerRepository
 
 ##### Parameters
@@ -242,14 +230,6 @@ Send one or more events.
 
 *   `events` **([Event](#event) | [Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)<[Event](#event)>)** The events.
 
-### setParameterValues
-
-#### Parameters
-
-*   `parameterValues` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** The parameter values of the extension.
-
-Returns **[Extension](#extension)** The updated extension instance.
-
 ### Message
 
 **Extends Event**
@@ -284,15 +264,11 @@ Represents a parameter.
 
 #### Parameters
 
-*   `name` &#x20;
-
-#### setName
-
-##### Parameters
-
 *   `name` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The name of the parameter.
 
-Returns **[Parameter](#parameter)** The updated parameter instance.
+#### getName
+
+Returns **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The name of the parameter.
 
 #### setDescription
 
@@ -310,11 +286,23 @@ Returns **[Parameter](#parameter)** The updated parameter instance.
 
 Returns **[Parameter](#parameter)** The updated parameter instance.
 
+#### getValue
+
+Returns **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The value of the parameter.
+
+#### setValue
+
+##### Parameters
+
+*   `value` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The value of the parameter.
+
+Returns **[Parameter](#parameter)** The updated parameter instance.
+
 #### setAvailableValues
 
 ##### Parameters
 
-*   `availableValues` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)** The available values of the parameter.
+*   `availableValues` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)<[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>** The available values of the parameter.
 
 Returns **[Parameter](#parameter)** The updated parameter instance.
 
@@ -322,14 +310,6 @@ Returns **[Parameter](#parameter)** The updated parameter instance.
 
 ##### Parameters
 
-*   `possibleValues` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)** The possible values of the parameter.
-
-Returns **[Parameter](#parameter)** The updated parameter instance.
-
-#### setMultipleValues
-
-##### Parameters
-
-*   `multipleValues` **[Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** Useful to specify if the parameter supports multiple values.
+*   `possibleValues` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)<[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>** The possible values of the parameter.
 
 Returns **[Parameter](#parameter)** The updated parameter instance.

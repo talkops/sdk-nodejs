@@ -34,36 +34,34 @@ export default class Extension {
    */
   constructor(token) {
     token = token || process.argv[2] || process.env.TALKOPS_TOKEN
-    if (!token) {
-      console.error('The token is required.')
-      process.exit(1)
-    }
-    const mercure = JSON.parse(Buffer.from(token, 'base64').toString())
-    this.#publisher = new Publisher(mercure, () => {
-      return {
-        instructions: this.#instructions,
-        name: this.#name,
-        sdk: {
-          name: 'nodejs',
-          version: pkg.version,
-        },
-        softwareVersion: this.#softwareVersion,
-        version: this.#version,
-        errors: this.#errors,
-        parameters: this.#parameters,
-        functionSchemas: this.#functionSchemas,
-      }
-    })
-    new Subscriber(
-      mercure,
-      () => {
+    if (token) {
+      const mercure = JSON.parse(Buffer.from(token, 'base64').toString())
+      this.#publisher = new Publisher(mercure, () => {
         return {
-          functions: this.#functions,
-          setParameterValues: this.#setParameterValues,
+          instructions: this.#instructions,
+          name: this.#name,
+          sdk: {
+            name: 'nodejs',
+            version: pkg.version,
+          },
+          softwareVersion: this.#softwareVersion,
+          version: this.#version,
+          errors: this.#errors,
+          parameters: this.#parameters,
+          functionSchemas: this.#functionSchemas,
         }
-      },
-      this.#publisher,
-    )
+      })
+      new Subscriber(
+        mercure,
+        () => {
+          return {
+            functions: this.#functions,
+            parameters: this.#parameters,
+          }
+        },
+        this.#publisher,
+      )
+    }
 
     if (process.env.NODE_ENV && process.env.NODE_ENV === 'development') {
       new Readme(() => {
@@ -202,34 +200,6 @@ export default class Extension {
   setParameters(parameters) {
     this.#parameters = parameters
     return this
-  }
-
-  /**
-   * @param {Object} parameterValues - The parameter values of the extension.
-   * @returns {Extension} The updated extension instance.
-   */
-  #setParameterValues(parameterValues) {
-    this.#parameterValues = parameterValues
-    return this
-  }
-
-  /**
-   * @param {String} name - The name of the parameter.
-   * @returns {String|Array<String>} The value(s) of the parameter.
-   */
-  getParameterValue(name) {
-    for (const parameter of this.#parameters) {
-      const parameterJson = parameter.toJSON()
-      if (parameterJson.name !== name) continue
-      if (process.env[name] !== undefined) {
-        return parameterJson.multipleValues ? process.env[name].split(',') : process.env[name]
-      }
-      if (this.#parameterValues[name] !== undefined) {
-        return this.#parameterValues[name]
-      }
-      return parameterJson.defaultValue ?? null
-    }
-    return null
   }
 
   /**

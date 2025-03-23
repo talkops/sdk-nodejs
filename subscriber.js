@@ -7,7 +7,7 @@ export default class Subscriber {
   #useExtension = null
   #publisher = null
 
-  constructor(mercure, useExtension, publisher) {
+  constructor(mercure, useExtension, publisher, parameters) {
     this.#url = mercure.url
     this.#topic = mercure.subscriber.topic
     this.#token = mercure.subscriber.token
@@ -33,6 +33,15 @@ export default class Subscriber {
     console.log('Subscriber#onEvent', event.type)
     if (event.type === 'request_state') {
       this.#publisher.resetData()
+    }
+    if (event.type === 'parameters') {
+      const extension = this.#useExtension()
+      for (eventParameter of event.parameters) {
+        for (parameter of extension.parameters) {
+          if (parameter.getName() !== eventParameter.name) continue
+          parameter.setValue(eventParameter.value || null)
+        }
+      }
     }
     if (event.type === 'function_call') {
       const extension = this.#useExtension()

@@ -5,20 +5,16 @@
 export default class Parameter {
   #name = null
   #description = null
+  #value = null
   #defaultValue = null
   #availableValues = []
   #possibleValues = []
-  #multipleValues = false
-
-  constructor(name) {
-    this.setName(name)
-  }
 
   /**
    * @param {String} name - The name of the parameter.
-   * @returns {Parameter} The updated parameter instance.
+   * @returns {Parameter} The created parameter instance.
    */
-  setName(name) {
+  constructor(name) {
     if (typeof name !== 'string' || name.trim() === '') {
       throw new Error('name is required and must be a non-empty string.')
     }
@@ -26,7 +22,13 @@ export default class Parameter {
       throw new Error('name expected uppercase letters, numbers, and underscores.')
     }
     this.#name = name
-    return this
+  }
+
+  /**
+   * @returns {String} The name of the parameter.
+   */
+  getName() {
+    return this.#name
   }
 
   /**
@@ -34,6 +36,9 @@ export default class Parameter {
    * @returns {Parameter} The updated parameter instance.
    */
   setDescription(description) {
+    if (typeof description !== 'string' || description.trim() === '') {
+      throw new Error('description is required and must be a non-empty string.')
+    }
     this.#description = description
     return this
   }
@@ -43,34 +48,59 @@ export default class Parameter {
    * @returns {Parameter} The updated parameter instance.
    */
   setDefaultValue(defaultValue) {
+    if (typeof defaultValue !== 'string' || defaultValue.trim() === '') {
+      throw new Error('defaultValue is required and must be a non-empty string.')
+    }
     this.#defaultValue = defaultValue
     return this
   }
 
   /**
-   * @param {Array} availableValues - The available values of the parameter.
+   * @returns {String} The value of the parameter.
+   */
+  getValue() {
+    return process.env[this.#name] ?? this.#value
+  }
+
+  /**
+   * @param {String} value - The value of the parameter.
+   * @returns {Parameter} The updated parameter instance.
+   */
+  setValue(value) {
+    if (typeof value !== 'string' || value.trim() === '') {
+      throw new Error('value is required and must be a non-empty string.')
+    }
+    this.#value = value
+    return this
+  }
+
+  /**
+   * @param {Array<String>} availableValues - The available values of the parameter.
    * @returns {Parameter} The updated parameter instance.
    */
   setAvailableValues(availableValues) {
+    if (!Array.isArray(availableValues) || availableValues.length === 0) {
+      throw new Error('availableValues must be a non-empty array.')
+    }
+    if (!availableValues.every((value) => typeof value === 'string' && value.trim() !== '')) {
+      throw new Error('Each item in availableValues must be a non-empty string.')
+    }
     this.#availableValues = availableValues
     return this
   }
 
   /**
-   * @param {Array} possibleValues - The possible values of the parameter.
+   * @param {Array<String>} possibleValues - The possible values of the parameter.
    * @returns {Parameter} The updated parameter instance.
    */
   setPossibleValues(possibleValues) {
+    if (!Array.isArray(possibleValues) || possibleValues.length === 0) {
+      throw new Error('possibleValues must be a non-empty array.')
+    }
+    if (!possibleValues.every((value) => typeof value === 'string' && value.trim() !== '')) {
+      throw new Error('Each item in possibleValues must be a non-empty string.')
+    }
     this.#possibleValues = possibleValues
-    return this
-  }
-
-  /**
-   * @param {Boolean} multipleValues - Useful to specify if the parameter supports multiple values.
-   * @returns {Parameter} The updated parameter instance.
-   */
-  setMultipleValues(multipleValues) {
-    this.#multipleValues = multipleValues
     return this
   }
 
@@ -81,7 +111,6 @@ export default class Parameter {
       defaultValue: this.#defaultValue,
       availableValues: this.#availableValues,
       possibleValues: this.#possibleValues,
-      multipleValues: this.#multipleValues,
     }
   }
 }
