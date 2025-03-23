@@ -257,8 +257,8 @@ export default class Extension {
    * @returns {Extension} The updated extension instance.
    */
   setFunctionSchemas(functionSchemas) {
-    if (!Array.isArray(functionSchemas) || functionSchemas.length === 0) {
-      throw new Error('functionSchemas must be a non-empty array.')
+    if (!Array.isArray(functionSchemas)) {
+      throw new Error('functionSchemas must be an array.')
     }
     if (!functionSchemas.every((schema) => typeof schema === 'object' && schema !== null)) {
       throw new Error('Each item in functionSchemas must be a non-null object.')
