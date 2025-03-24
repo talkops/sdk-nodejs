@@ -227,7 +227,9 @@ export default class Extension {
     if (typeof error !== 'string' || error.trim() === '') {
       throw new Error('error must be a non-empty string.')
     }
-    this.#errors.push(error)
+    if (!this.#errors.includes(error)) {
+      this.#errors.push(error)
+    }
     return this
   }
 
