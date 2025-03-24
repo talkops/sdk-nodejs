@@ -26,7 +26,7 @@ This software development kit is made to create [TalkOps](https://talkops.app) e
         *   [Parameters](#parameters-6)
     *   [setSoftwareVersion](#setsoftwareversion)
         *   [Parameters](#parameters-7)
-    *   [setCategories](#setcategories)
+    *   [setCategory](#setcategory)
         *   [Parameters](#parameters-8)
     *   [setFeatures](#setfeatures)
         *   [Parameters](#parameters-9)
@@ -142,11 +142,11 @@ Returns **[Extension](#extension)** The updated extension instance.
 
 Returns **[Extension](#extension)** The updated extension instance.
 
-#### setCategories
+#### setCategory
 
 ##### Parameters
 
-*   `categories` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)<[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>** The categories of the extension.
+*   `category` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The category of the extension.
 
 Returns **[Extension](#extension)** The updated extension instance.
 

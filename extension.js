@@ -10,7 +10,7 @@ import pkg from './package.json' with { type: 'json' }
  * @class
  */
 export default class Extension {
-  #categories = []
+  #category = null
   #debug = false
   #dockerRepository = null
   #icon = null
@@ -75,7 +75,7 @@ export default class Extension {
       })
       new Manifest(() => {
         return {
-          categories: this.#categories,
+          category: this.#category,
           dockerRepository: this.#dockerRepository,
           features: this.#features,
           icon: this.#icon,
@@ -162,14 +162,14 @@ export default class Extension {
   }
 
   /**
-   * @param {Array<String>} categories - The categories of the extension.
+   * @param {String} category - The category of the extension.
    * @returns {Extension} The updated extension instance.
    */
-  setCategories(categories) {
-    if (!Array.isArray(categories) || !categories.every((f) => typeof f === 'string')) {
-      throw new TypeError('categories must be an array of strings')
+  setCategory(category) {
+    if (typeof category !== 'string' || category.trim() === '') {
+      throw new Error('category is required and must be a non-empty string.')
     }
-    this.#categories = categories
+    this.#category = category
     return this
   }
 
