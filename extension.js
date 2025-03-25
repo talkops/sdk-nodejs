@@ -12,11 +12,9 @@ import pkg from './package.json' with { type: 'json' }
 export default class Extension {
   #category = null
   #debug = false
-  #dockerRepository = null
   #icon = null
   #instructions = null
   #name = null
-  #version = null
   #errors = []
   #features = []
   #functions = []
@@ -46,7 +44,6 @@ export default class Extension {
             version: pkg.version,
           },
           softwareVersion: this.#softwareVersion,
-          version: this.#version,
           errors: this.#errors,
           parameters: this.#parameters,
           functionSchemas: this.#functionSchemas,
@@ -68,7 +65,6 @@ export default class Extension {
     if (process.env.NODE_ENV && process.env.NODE_ENV === 'development') {
       new Readme(() => {
         return {
-          dockerRepository: this.#dockerRepository,
           features: this.#features,
           name: this.#name,
         }
@@ -76,7 +72,6 @@ export default class Extension {
       new Manifest(() => {
         return {
           category: this.#category,
-          dockerRepository: this.#dockerRepository,
           features: this.#features,
           icon: this.#icon,
           installationSteps: this.#installationSteps,
@@ -85,7 +80,6 @@ export default class Extension {
             name: 'nodejs',
             version: pkg.version,
           },
-          version: this.#version,
           website: this.#website,
         }
       })
@@ -103,7 +97,7 @@ export default class Extension {
    */
   setName(name) {
     if (typeof name !== 'string' || name.trim() === '') {
-      throw new Error('name is required and must be a non-empty string.')
+      throw new Error('name must be a non-empty string.')
     }
     this.#name = name
     return this
@@ -115,7 +109,7 @@ export default class Extension {
    */
   setIcon(icon) {
     if (typeof icon !== 'string' || icon.trim() === '') {
-      throw new Error('icon is required and must be a non-empty string.')
+      throw new Error('icon must be a non-empty string.')
     }
     try {
       new URL(icon)
@@ -132,7 +126,7 @@ export default class Extension {
    */
   setWebsite(website) {
     if (typeof website !== 'string' || website.trim() === '') {
-      throw new Error('website is required and must be a non-empty string.')
+      throw new Error('website must be a non-empty string.')
     }
     try {
       new URL(website)
@@ -140,15 +134,6 @@ export default class Extension {
       throw new Error('website must be a valid URL.')
     }
     this.#website = website
-    return this
-  }
-
-  /**
-   * @param {String} version - The version of the extension.
-   * @returns {Extension} The updated extension instance.
-   */
-  setVersion(version) {
-    this.#version = version
     return this
   }
 
@@ -167,7 +152,7 @@ export default class Extension {
    */
   setCategory(category) {
     if (typeof category !== 'string' || category.trim() === '') {
-      throw new Error('category is required and must be a non-empty string.')
+      throw new Error('category must be a non-empty string.')
     }
     this.#category = category
     return this
@@ -178,8 +163,11 @@ export default class Extension {
    * @returns {Extension} The updated extension instance.
    */
   setFeatures(features) {
-    if (!Array.isArray(features) || !features.every((f) => typeof f === 'string')) {
-      throw new TypeError('features must be an array of strings')
+    if (
+      !Array.isArray(features) ||
+      !features.every((i) => typeof i === 'string' && i.trim() !== '')
+    ) {
+      throw new TypeError('features must be an array of non-empty strings.')
     }
     this.#features = features
     return this
@@ -192,9 +180,9 @@ export default class Extension {
   setinstallationSteps(installationSteps) {
     if (
       !Array.isArray(installationSteps) ||
-      !installationSteps.every((f) => typeof f === 'string')
+      !installationSteps.every((i) => typeof i === 'string' && i.trim() !== '')
     ) {
-      throw new TypeError('installationSteps must be an array of strings')
+      throw new TypeError('installationSteps must be an array of non-empty strings.')
     }
     this.#installationSteps = installationSteps
     return this
@@ -205,16 +193,10 @@ export default class Extension {
    * @returns {Extension} The updated extension instance.
    */
   setParameters(parameters) {
+    if (!Array.isArray(parameters) || !parameters.every((f) => typeof Parameter)) {
+      throw new TypeError('parameters must be an array of Parameter instances.')
+    }
     this.#parameters = parameters
-    return this
-  }
-
-  /**
-   * @param {String} dockerRepository - The docker repository of the extension.
-   * @returns {Extension} The updated extension instance.
-   */
-  setDockerRepository(dockerRepository) {
-    this.#dockerRepository = dockerRepository
     return this
   }
 
@@ -259,11 +241,11 @@ export default class Extension {
    * @returns {Extension} The updated extension instance.
    */
   setFunctionSchemas(functionSchemas) {
-    if (!Array.isArray(functionSchemas)) {
-      throw new Error('functionSchemas must be an array.')
-    }
-    if (!functionSchemas.every((schema) => typeof schema === 'object' && schema !== null)) {
-      throw new Error('Each item in functionSchemas must be a non-null object.')
+    if (
+      !Array.isArray(functionSchemas) ||
+      !functionSchemas.every((schema) => typeof schema === 'object' && schema !== null)
+    ) {
+      throw new Error('functionSchemas must be an array of non-null objects.')
     }
     this.#functionSchemas = functionSchemas
     return this
@@ -279,7 +261,7 @@ export default class Extension {
       !this.#functions.every((fn) => typeof fn === 'function') ||
       !this.#functions.every((fn) => fn.name.trim().length > 0)
     ) {
-      throw new Error('functions must be an array of named function.')
+      throw new Error('functions must be an array of named functions.')
     }
     this.#functions = functions
     return this

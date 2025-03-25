@@ -9,6 +9,7 @@ export default class Parameter {
   #defaultValue = null
   #availableValues = []
   #possibleValues = []
+  #optional = false
 
   /**
    * @param {String} name - The name of the parameter.
@@ -29,6 +30,18 @@ export default class Parameter {
    */
   getName() {
     return this.#name
+  }
+
+  /**
+   * @param {Boolean} optional - If the parameter is optional.
+   * @returns {Parameter} The updated parameter instance.
+   */
+  setOptional(optional) {
+    if (typeof optional !== 'boolean') {
+      throw new Error('optional must be a boolean.')
+    }
+    this.#optional = optional
+    return this
   }
 
   /**
@@ -108,9 +121,11 @@ export default class Parameter {
     return {
       name: this.#name,
       description: this.#description,
+      env: process.env[this.#name] !== undefined,
       defaultValue: this.#defaultValue,
       availableValues: this.#availableValues,
       possibleValues: this.#possibleValues,
+      optional: this.#optional,
     }
   }
 }

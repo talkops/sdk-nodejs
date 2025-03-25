@@ -22,51 +22,49 @@ This software development kit is made to create [TalkOps](https://talkops.app) e
         *   [Parameters](#parameters-4)
     *   [setWebsite](#setwebsite)
         *   [Parameters](#parameters-5)
-    *   [setVersion](#setversion)
-        *   [Parameters](#parameters-6)
     *   [setSoftwareVersion](#setsoftwareversion)
-        *   [Parameters](#parameters-7)
+        *   [Parameters](#parameters-6)
     *   [setCategory](#setcategory)
-        *   [Parameters](#parameters-8)
+        *   [Parameters](#parameters-7)
     *   [setFeatures](#setfeatures)
-        *   [Parameters](#parameters-9)
+        *   [Parameters](#parameters-8)
     *   [setinstallationSteps](#setinstallationsteps)
-        *   [Parameters](#parameters-10)
+        *   [Parameters](#parameters-9)
     *   [setParameters](#setparameters)
-        *   [Parameters](#parameters-11)
-    *   [setDockerRepository](#setdockerrepository)
-        *   [Parameters](#parameters-12)
+        *   [Parameters](#parameters-10)
     *   [addError](#adderror)
-        *   [Parameters](#parameters-13)
+        *   [Parameters](#parameters-11)
     *   [clearErrors](#clearerrors)
     *   [setInstructions](#setinstructions)
-        *   [Parameters](#parameters-14)
+        *   [Parameters](#parameters-12)
     *   [setFunctionSchemas](#setfunctionschemas)
-        *   [Parameters](#parameters-15)
+        *   [Parameters](#parameters-13)
     *   [setFunctions](#setfunctions)
-        *   [Parameters](#parameters-16)
+        *   [Parameters](#parameters-14)
     *   [send](#send)
-        *   [Parameters](#parameters-17)
+        *   [Parameters](#parameters-15)
 *   [Message](#message)
     *   [setText](#settext)
-        *   [Parameters](#parameters-18)
+        *   [Parameters](#parameters-16)
 *   [Notification](#notification)
     *   [setLevel](#setlevel)
-        *   [Parameters](#parameters-19)
+        *   [Parameters](#parameters-17)
 *   [Parameter](#parameter)
-    *   [Parameters](#parameters-20)
+    *   [Parameters](#parameters-18)
     *   [getName](#getname)
+    *   [setOptional](#setoptional)
+        *   [Parameters](#parameters-19)
     *   [setDescription](#setdescription)
-        *   [Parameters](#parameters-21)
+        *   [Parameters](#parameters-20)
     *   [setDefaultValue](#setdefaultvalue)
-        *   [Parameters](#parameters-22)
+        *   [Parameters](#parameters-21)
     *   [getValue](#getvalue)
     *   [setValue](#setvalue)
-        *   [Parameters](#parameters-23)
+        *   [Parameters](#parameters-22)
     *   [setAvailableValues](#setavailablevalues)
-        *   [Parameters](#parameters-24)
+        *   [Parameters](#parameters-23)
     *   [setPossibleValues](#setpossiblevalues)
-        *   [Parameters](#parameters-25)
+        *   [Parameters](#parameters-24)
 
 ### Alarm
 
@@ -126,14 +124,6 @@ Returns **[Extension](#extension)** The updated extension instance.
 
 Returns **[Extension](#extension)** The updated extension instance.
 
-#### setVersion
-
-##### Parameters
-
-*   `version` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The version of the extension.
-
-Returns **[Extension](#extension)** The updated extension instance.
-
 #### setSoftwareVersion
 
 ##### Parameters
@@ -171,14 +161,6 @@ Returns **[Extension](#extension)** The updated extension instance.
 ##### Parameters
 
 *   `parameters` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)<[Parameter](#parameter)>** The parameters of the extension.
-
-Returns **[Extension](#extension)** The updated extension instance.
-
-#### setDockerRepository
-
-##### Parameters
-
-*   `dockerRepository` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The docker repository of the extension.
 
 Returns **[Extension](#extension)** The updated extension instance.
 
@@ -269,6 +251,14 @@ Represents a parameter.
 #### getName
 
 Returns **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The name of the parameter.
+
+#### setOptional
+
+##### Parameters
+
+*   `optional` **[Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** If the parameter is optional.
+
+Returns **[Parameter](#parameter)** The updated parameter instance.
 
 #### setDescription
 
