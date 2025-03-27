@@ -1,36 +1,32 @@
 import axios from 'axios'
 
 export default class Publisher {
-  #url = null
-  #topic = null
-  #token = null
-  #useExtension = null
-  #data = null
+  #useConfig = null
+  #useState = null
+  #lastEventState = null
 
-  constructor(mercure, useExtension) {
-    this.#url = mercure.url
-    this.#topic = mercure.publisher.topic
-    this.#token = mercure.publisher.token
-    this.#useExtension = useExtension
+  constructor(useConfig, useState) {
+    this.#useConfig = useConfig
+    this.#useState = useState
     setTimeout(() => this.#publishState(), 1000)
   }
 
-  resetData() {
-    this.#data = null
+  publishState() {
+    this.publishEvent({ type: 'state', state: this.#useState() })
   }
 
   async publishEvent(event) {
-    const extension = this.#useExtension()
-    extension.debug && console.log('pub', event.type)
+    const config = this.#useConfig()
+    config.debug && console.log('pub', event.type)
     await axios.post(
-      this.#url,
+      config.mercure.url,
       new URLSearchParams({
-        topic: this.#topic,
+        topic: config.mercure.publisher.topic,
         data: JSON.stringify(event),
       }),
       {
         headers: {
-          Authorization: `Bearer ${this.#token}`,
+          Authorization: `Bearer ${config.mercure.publisher.token}`,
           'Content-Type': 'application/x-www-form-urlencoded',
         },
       },
@@ -38,12 +34,12 @@ export default class Publisher {
   }
 
   async #publishState() {
-    const extension = this.#useExtension()
-    const event = { type: 'state', extension }
-    const data = JSON.stringify(event)
-    if (this.#data !== data) {
+    const state = this.#useState()
+    const event = { type: 'state', state }
+    const lastEventState = JSON.stringify(event)
+    if (this.#lastEventState !== lastEventState) {
       await this.publishEvent(event)
-      this.#data = data
+      this.#lastEventState = lastEventState
     }
     setTimeout(() => this.#publishState(), 1000)
   }

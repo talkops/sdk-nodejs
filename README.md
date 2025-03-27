@@ -1,6 +1,6 @@
-# TalkOps SDK: NodeJS
+# TalkOps SDK: Node.js
 
-This software development kit is made to create [TalkOps](https://talkops.app) extensions using NodeJS.
+This software development kit is made to create [TalkOps](https://talkops.app) extensions using Node.js.
 
 ## Documentation
 
@@ -16,55 +16,61 @@ This software development kit is made to create [TalkOps](https://talkops.app) e
         *   [Parameters](#parameters-1)
 *   [Extension](#extension)
     *   [Parameters](#parameters-2)
-    *   [setName](#setname)
+    *   [setBootstrap](#setbootstrap)
         *   [Parameters](#parameters-3)
-    *   [setIcon](#seticon)
+    *   [setName](#setname)
         *   [Parameters](#parameters-4)
-    *   [setWebsite](#setwebsite)
+    *   [setIcon](#seticon)
         *   [Parameters](#parameters-5)
-    *   [setSoftwareVersion](#setsoftwareversion)
+    *   [setWebsite](#setwebsite)
         *   [Parameters](#parameters-6)
-    *   [setCategory](#setcategory)
+    *   [setSoftwareVersion](#setsoftwareversion)
         *   [Parameters](#parameters-7)
-    *   [setFeatures](#setfeatures)
+    *   [setCategory](#setcategory)
         *   [Parameters](#parameters-8)
-    *   [setinstallationSteps](#setinstallationsteps)
+    *   [setFeatures](#setfeatures)
         *   [Parameters](#parameters-9)
-    *   [setParameters](#setparameters)
+    *   [setinstallationSteps](#setinstallationsteps)
         *   [Parameters](#parameters-10)
-    *   [addError](#adderror)
+    *   [setParameters](#setparameters)
         *   [Parameters](#parameters-11)
+    *   [addError](#adderror)
+        *   [Parameters](#parameters-12)
     *   [clearErrors](#clearerrors)
     *   [setInstructions](#setinstructions)
-        *   [Parameters](#parameters-12)
-    *   [setFunctionSchemas](#setfunctionschemas)
         *   [Parameters](#parameters-13)
-    *   [setFunctions](#setfunctions)
+    *   [setFunctionSchemas](#setfunctionschemas)
         *   [Parameters](#parameters-14)
-    *   [send](#send)
+    *   [setFunctions](#setfunctions)
         *   [Parameters](#parameters-15)
+    *   [send](#send)
+        *   [Parameters](#parameters-16)
 *   [Message](#message)
     *   [setText](#settext)
-        *   [Parameters](#parameters-16)
+        *   [Parameters](#parameters-17)
 *   [Notification](#notification)
     *   [setLevel](#setlevel)
-        *   [Parameters](#parameters-17)
+        *   [Parameters](#parameters-18)
 *   [Parameter](#parameter)
-    *   [Parameters](#parameters-18)
+    *   [Parameters](#parameters-19)
     *   [getName](#getname)
     *   [setOptional](#setoptional)
-        *   [Parameters](#parameters-19)
-    *   [setDescription](#setdescription)
         *   [Parameters](#parameters-20)
-    *   [setDefaultValue](#setdefaultvalue)
+    *   [isOptional](#isoptional)
+    *   [setDescription](#setdescription)
         *   [Parameters](#parameters-21)
+    *   [setDefaultValue](#setdefaultvalue)
+        *   [Parameters](#parameters-22)
+    *   [setType](#settype)
+        *   [Parameters](#parameters-23)
     *   [getValue](#getvalue)
     *   [setValue](#setvalue)
-        *   [Parameters](#parameters-22)
-    *   [setAvailableValues](#setavailablevalues)
-        *   [Parameters](#parameters-23)
-    *   [setPossibleValues](#setpossiblevalues)
         *   [Parameters](#parameters-24)
+    *   [hasValue](#hasvalue)
+    *   [setAvailableValues](#setavailablevalues)
+        *   [Parameters](#parameters-25)
+    *   [setPossibleValues](#setpossiblevalues)
+        *   [Parameters](#parameters-26)
 
 ### Alarm
 
@@ -99,6 +105,14 @@ Represents an extension.
 #### Parameters
 
 *   `token` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The token of the extension.
+
+#### setBootstrap
+
+##### Parameters
+
+*   `bootstrap` **[Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)** The extension startup function.
+
+Returns **[Extension](#extension)** The updated extension instance.
 
 #### setName
 
@@ -260,6 +274,10 @@ Returns **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/G
 
 Returns **[Parameter](#parameter)** The updated parameter instance.
 
+#### isOptional
+
+Returns **[Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** If the parameter is optional.
+
 #### setDescription
 
 ##### Parameters
@@ -276,6 +294,14 @@ Returns **[Parameter](#parameter)** The updated parameter instance.
 
 Returns **[Parameter](#parameter)** The updated parameter instance.
 
+#### setType
+
+##### Parameters
+
+*   `type` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The type of the parameter.
+
+Returns **[Parameter](#parameter)** The updated parameter instance.
+
 #### getValue
 
 Returns **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The value of the parameter.
@@ -284,9 +310,13 @@ Returns **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/G
 
 ##### Parameters
 
-*   `value` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The value of the parameter.
+*   `value` **([String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String) | null)** The value of the parameter.
 
 Returns **[Parameter](#parameter)** The updated parameter instance.
+
+#### hasValue
+
+Returns **[Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** If the parameter is not empty.
 
 #### setAvailableValues
 

@@ -1,51 +1,53 @@
 import { EventSource } from 'eventsource'
 
 export default class Subscriber {
-  #url = null
-  #topic = null
-  #token = null
-  #useExtension = null
-  #publisher = null
+  #useConfig = null
 
-  constructor(mercure, useExtension, publisher, parameters) {
-    this.#url = mercure.url
-    this.#topic = mercure.subscriber.topic
-    this.#token = mercure.subscriber.token
-    this.#useExtension = useExtension
-    this.#publisher = publisher
+  constructor(useConfig) {
+    this.#useConfig = useConfig
     this.#subscribe()
   }
 
   #subscribe() {
-    new EventSource(`${this.#url}?topic=${encodeURIComponent(this.#topic)}`, {
-      fetch: (input, init) =>
-        fetch(input, {
-          ...init,
-          headers: {
-            ...init.headers,
-            Authorization: `Bearer ${this.#token}`,
-          },
-        }),
-    }).addEventListener('message', (message) => this.#onEvent(JSON.parse(message.data)))
+    const config = this.#useConfig()
+    new EventSource(
+      `${config.mercure.url}?topic=${encodeURIComponent(config.mercure.subscriber.topic)}`,
+      {
+        fetch: (input, init) =>
+          fetch(input, {
+            ...init,
+            headers: {
+              ...init.headers,
+              Authorization: `Bearer ${config.mercure.subscriber.token}`,
+            },
+          }),
+      },
+    ).addEventListener('message', (message) => this.#onEvent(JSON.parse(message.data)))
   }
 
   async #onEvent(event) {
-    const extension = this.#useExtension()
-    extension.debug && console.log('sub', event.type)
-    if (event.type === 'request_state') {
-      this.#publisher.resetData()
-    }
-    if (event.type === 'parameters') {
-      const extension = this.#useExtension()
-      for (eventParameter of event.parameters) {
-        for (parameter of extension.parameters) {
-          if (parameter.getName() !== eventParameter.name) continue
-          parameter.setValue(eventParameter.value || null)
+    const config = this.#useConfig()
+    config.debug && console.log('sub', event.type)
+    if (event.type === 'boot') {
+      for (const name of Object.keys(event.parameters)) {
+        for (const parameter of config.parameters) {
+          if (parameter.getName() !== name) continue
+          parameter.setValue(event.parameters[name])
         }
+      }
+      let ready = true
+      for (const parameter of config.parameters) {
+        if (parameter.isOptional()) continue
+        if (parameter.hasValue()) continue
+        ready = false
+      }
+      config.publisher.publishState()
+      if (ready && config.bootstrap) {
+        config.extension.clearErrors()
+        config.bootstrap()
       }
     }
     if (event.type === 'function_call') {
-      const extension = this.#useExtension()
       for (const fn of extension.functions) {
         if (fn.name !== event.name) continue
         const match = fn.toString().match(/\(([^)]*)\)/)
@@ -53,7 +55,7 @@ export default class Subscriber {
           (name) => event.args[name] ?? event[name],
         )
         event.output = await Reflect.apply(fn, null, argumentsList)
-        this.#publisher.publishEvent(event)
+        config.publisher.publishEvent(event)
         return
       }
     }

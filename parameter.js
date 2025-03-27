@@ -10,6 +10,7 @@ export default class Parameter {
   #availableValues = []
   #possibleValues = []
   #optional = false
+  #type = 'text'
 
   /**
    * @param {String} name - The name of the parameter.
@@ -17,7 +18,7 @@ export default class Parameter {
    */
   constructor(name) {
     if (typeof name !== 'string' || name.trim() === '') {
-      throw new Error('name is required and must be a non-empty string.')
+      throw new Error('name must be a non-empty string.')
     }
     if (!/^[A-Z0-9_]+$/.test(name)) {
       throw new Error('name expected uppercase letters, numbers, and underscores.')
@@ -45,12 +46,19 @@ export default class Parameter {
   }
 
   /**
+   * @returns {Boolean} If the parameter is optional.
+   */
+  isOptional() {
+    return this.#optional
+  }
+
+  /**
    * @param {String} description - The description of the parameter.
    * @returns {Parameter} The updated parameter instance.
    */
   setDescription(description) {
     if (typeof description !== 'string' || description.trim() === '') {
-      throw new Error('description is required and must be a non-empty string.')
+      throw new Error('description must be a non-empty string.')
     }
     this.#description = description
     return this
@@ -62,9 +70,36 @@ export default class Parameter {
    */
   setDefaultValue(defaultValue) {
     if (typeof defaultValue !== 'string' || defaultValue.trim() === '') {
-      throw new Error('defaultValue is required and must be a non-empty string.')
+      throw new Error('defaultValue must be a non-empty string.')
     }
     this.#defaultValue = defaultValue
+    return this
+  }
+
+  /**
+   * @param {String} type - The type of the parameter.
+   * @returns {Parameter} The updated parameter instance.
+   */
+  setType(type) {
+    const allowedTypes = [
+      'text',
+      'password',
+      'textarea',
+      'email',
+      'search',
+      'tel',
+      'number',
+      'url',
+      'time',
+      'date',
+      'datetime-local',
+      'select',
+      'color',
+    ]
+    if (!allowedTypes.includes(type)) {
+      throw new Error(`type must be one of the following strings: ${allowedTypes.join('|')}`)
+    }
+    this.#type = type
     return this
   }
 
@@ -76,15 +111,22 @@ export default class Parameter {
   }
 
   /**
-   * @param {String} value - The value of the parameter.
+   * @param {String|null} value - The value of the parameter.
    * @returns {Parameter} The updated parameter instance.
    */
   setValue(value) {
-    if (typeof value !== 'string' || value.trim() === '') {
-      throw new Error('value is required and must be a non-empty string.')
+    if (value !== null && (typeof value !== 'string' || value.trim() === '')) {
+      throw new Error('value must be a non-empty string.')
     }
     this.#value = value
     return this
+  }
+
+  /**
+   * @returns {Boolean} If the parameter is not empty.
+   */
+  hasValue() {
+    return this.getValue() !== null && this.getValue() !== ''
   }
 
   /**
@@ -126,6 +168,7 @@ export default class Parameter {
       availableValues: this.#availableValues,
       possibleValues: this.#possibleValues,
       optional: this.#optional,
+      type: this.#type,
     }
   }
 }

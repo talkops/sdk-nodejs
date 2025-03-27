@@ -10,16 +10,17 @@ import pkg from './package.json' with { type: 'json' }
  * @class
  */
 export default class Extension {
+  #bootstrap = null
   #category = null
   #debug = false
-  #icon = null
-  #instructions = null
-  #name = null
   #errors = []
   #features = []
   #functions = []
   #functionSchemas = []
+  #icon = null
   #installationSteps = []
+  #instructions = null
+  #name = null
   #parameters = []
   #softwareVersion = null
   #website = null
@@ -34,32 +35,40 @@ export default class Extension {
     token = token || process.argv[2] || process.env.TALKOPS_TOKEN
     if (token) {
       const mercure = JSON.parse(Buffer.from(token, 'base64').toString())
-      this.#publisher = new Publisher(mercure, () => {
-        return {
-          debug: this.#debug,
-          instructions: this.#instructions,
-          name: this.#name,
-          sdk: {
-            name: 'nodejs',
-            version: pkg.version,
-          },
-          softwareVersion: this.#softwareVersion,
-          errors: this.#errors,
-          parameters: this.#parameters,
-          functionSchemas: this.#functionSchemas,
-        }
-      })
-      new Subscriber(
-        mercure,
+      this.#publisher = new Publisher(
         () => {
           return {
             debug: this.#debug,
-            functions: this.#functions,
-            parameters: this.#parameters,
+            mercure,
           }
         },
-        this.#publisher,
+        () => {
+          return {
+            errors: this.#errors,
+            installationSteps: this.#installationSteps,
+            instructions: this.#instructions,
+            name: this.#name,
+            parameters: this.#parameters,
+            sdk: {
+              name: 'nodejs',
+              version: pkg.version,
+            },
+            softwareVersion: this.#softwareVersion,
+            functionSchemas: this.#functionSchemas,
+          }
+        },
       )
+      new Subscriber(() => {
+        return {
+          debug: this.#debug,
+          extension: this,
+          functions: this.#functions,
+          mercure,
+          parameters: this.#parameters,
+          publisher: this.#publisher,
+          bootstrap: this.#bootstrap,
+        }
+      })
     }
 
     if (process.env.NODE_ENV && process.env.NODE_ENV === 'development') {
@@ -74,16 +83,28 @@ export default class Extension {
           category: this.#category,
           features: this.#features,
           icon: this.#icon,
-          installationSteps: this.#installationSteps,
           name: this.#name,
           sdk: {
             name: 'nodejs',
             version: pkg.version,
           },
+          softwareVersion: this.#softwareVersion,
           website: this.#website,
         }
       })
     }
+  }
+
+  /**
+   * @param {Function} bootstrap - The extension startup function.
+   * @returns {Extension} The updated extension instance.
+   */
+  setBootstrap(bootstrap) {
+    if (typeof bootstrap !== 'function') {
+      throw new Error('bootstrap must be a function.')
+    }
+    this.#bootstrap = bootstrap
+    return this
   }
 
   enableDebug() {
