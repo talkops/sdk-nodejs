@@ -3,6 +3,7 @@ import Subscriber from './subscriber.js'
 import Parameter from './parameter.js'
 import Readme from './readme.js'
 import Manifest from './manifest.js'
+import categories from './categories.json' with { type: 'json' }
 import pkg from './package.json' with { type: 'json' }
 
 /**
@@ -13,6 +14,7 @@ export default class Extension {
   #bootstrap = null
   #category = null
   #debug = false
+  #demo = false
   #errors = []
   #features = []
   #functions = []
@@ -81,6 +83,7 @@ export default class Extension {
       new Manifest(() => {
         return {
           category: this.#category,
+          demo: this.#demo,
           features: this.#features,
           icon: this.#icon,
           name: this.#name,
@@ -109,6 +112,18 @@ export default class Extension {
 
   enableDebug() {
     this.#debug = true
+    return this
+  }
+
+  /**
+   * @param {Boolean} demo - If the extension is a demonstration.
+   * @returns {Extension} The updated extension instance.
+   */
+  setDemo(demo) {
+    if (typeof demo !== 'boolean') {
+      throw new Error('name must be a boolean.')
+    }
+    this.#demo = demo
     return this
   }
 
@@ -172,8 +187,8 @@ export default class Extension {
    * @returns {Extension} The updated extension instance.
    */
   setCategory(category) {
-    if (typeof category !== 'string' || category.trim() === '') {
-      throw new Error('category must be a non-empty string.')
+    if (!categories.includes(category)) {
+      throw new Error(`category must be one of the following strings: ${categories.join(', ')}`)
     }
     this.#category = category
     return this
