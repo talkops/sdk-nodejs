@@ -47,6 +47,7 @@ export default class Extension {
         () => {
           return {
             category: this.#category,
+            demo: this.#demo,
             errors: this.#errors,
             icon: this.#icon,
             installationSteps: this.#installationSteps,
