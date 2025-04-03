@@ -9,6 +9,23 @@ export default class Publisher {
     this.#useConfig = useConfig
     this.#useState = useState
     setTimeout(() => this.#publishState(), 1000)
+
+    const originalStdoutWrite = process.stdout.write
+    process.stdout.write = (chunk) => {
+      this.publishEvent({
+        type: 'stdout',
+        data: chunk.toString().trim(),
+      })
+      originalStdoutWrite.call(process.stdout, chunk)
+    }
+    const originalStderrWrite = process.stderr.write
+    process.stderr.write = (chunk) => {
+      this.publishEvent({
+        type: 'stderr',
+        data: chunk.toString().trim(),
+      })
+      originalStderrWrite.call(process.stderr, chunk)
+    }
   }
 
   publishState() {

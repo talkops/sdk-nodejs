@@ -36,43 +36,40 @@ This software development kit is made to create [TalkOps](https://talkops.app) e
         *   [Parameters](#parameters-11)
     *   [setParameters](#setparameters)
         *   [Parameters](#parameters-12)
-    *   [addError](#adderror)
-        *   [Parameters](#parameters-13)
-    *   [clearErrors](#clearerrors)
     *   [setInstructions](#setinstructions)
-        *   [Parameters](#parameters-14)
+        *   [Parameters](#parameters-13)
     *   [setFunctionSchemas](#setfunctionschemas)
-        *   [Parameters](#parameters-15)
+        *   [Parameters](#parameters-14)
     *   [setFunctions](#setfunctions)
-        *   [Parameters](#parameters-16)
+        *   [Parameters](#parameters-15)
     *   [send](#send)
-        *   [Parameters](#parameters-17)
+        *   [Parameters](#parameters-16)
 *   [Message](#message)
     *   [setText](#settext)
-        *   [Parameters](#parameters-18)
+        *   [Parameters](#parameters-17)
 *   [Notification](#notification)
     *   [setLevel](#setlevel)
-        *   [Parameters](#parameters-19)
+        *   [Parameters](#parameters-18)
 *   [Parameter](#parameter)
-    *   [Parameters](#parameters-20)
+    *   [Parameters](#parameters-19)
     *   [getName](#getname)
     *   [setOptional](#setoptional)
-        *   [Parameters](#parameters-21)
+        *   [Parameters](#parameters-20)
     *   [isOptional](#isoptional)
     *   [setDescription](#setdescription)
-        *   [Parameters](#parameters-22)
+        *   [Parameters](#parameters-21)
     *   [setDefaultValue](#setdefaultvalue)
-        *   [Parameters](#parameters-23)
+        *   [Parameters](#parameters-22)
     *   [setType](#settype)
-        *   [Parameters](#parameters-24)
+        *   [Parameters](#parameters-23)
     *   [getValue](#getvalue)
     *   [setValue](#setvalue)
-        *   [Parameters](#parameters-25)
+        *   [Parameters](#parameters-24)
     *   [hasValue](#hasvalue)
     *   [setAvailableValues](#setavailablevalues)
-        *   [Parameters](#parameters-26)
+        *   [Parameters](#parameters-25)
     *   [setPossibleValues](#setpossiblevalues)
-        *   [Parameters](#parameters-27)
+        *   [Parameters](#parameters-26)
 
 ### Alarm
 
@@ -185,22 +182,6 @@ Returns **[Extension](#extension)** The updated extension instance.
 ##### Parameters
 
 *   `parameters` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)<[Parameter](#parameter)>** The parameters of the extension.
-
-Returns **[Extension](#extension)** The updated extension instance.
-
-#### addError
-
-Add an error.
-
-##### Parameters
-
-*   `error` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The error message.
-
-Returns **[Extension](#extension)** The updated extension instance.
-
-#### clearErrors
-
-Clear errors.
 
 Returns **[Extension](#extension)** The updated extension instance.
 

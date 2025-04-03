@@ -15,7 +15,6 @@ export default class Extension {
   #category = null
   #debug = false
   #demo = false
-  #errors = []
   #features = []
   #functions = []
   #functionSchemas = []
@@ -48,7 +47,6 @@ export default class Extension {
           return {
             category: this.#category,
             demo: this.#demo,
-            errors: this.#errors,
             icon: this.#icon,
             installationSteps: this.#installationSteps,
             instructions: this.#instructions,
@@ -236,30 +234,6 @@ export default class Extension {
       throw new TypeError('parameters must be an array of Parameter instances.')
     }
     this.#parameters = parameters
-    return this
-  }
-
-  /**
-   * Add an error.
-   * @param {String} error - The error message.
-   * @returns {Extension} The updated extension instance.
-   */
-  addError(error) {
-    if (typeof error !== 'string' || error.trim() === '') {
-      throw new Error('error must be a non-empty string.')
-    }
-    if (!this.#errors.includes(error)) {
-      this.#errors.push(error)
-    }
-    return this
-  }
-
-  /**
-   * Clear errors.
-   * @returns {Extension} The updated extension instance.
-   */
-  clearErrors() {
-    this.#errors = []
     return this
   }
 

@@ -43,7 +43,6 @@ export default class Subscriber {
       }
       config.publisher.publishState()
       if (ready && config.bootstrap) {
-        config.extension.clearErrors()
         config.bootstrap()
       }
     }
