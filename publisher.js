@@ -4,6 +4,7 @@ export default class Publisher {
   #useConfig = null
   #useState = null
   #lastEventState = null
+  #lastPingAt = null
 
   constructor(useConfig, useState) {
     this.#useConfig = useConfig
@@ -32,9 +33,14 @@ export default class Publisher {
     this.publishEvent({ type: 'state', state: this.#useState() })
   }
 
+  onPing() {
+    this.#lastPingAt = new Date().getTime()
+    this.publishEvent({ type: 'pong' })
+  }
+
   async publishEvent(event) {
+    if (this.#lastPingAt && this.#lastPingAt < new Date().getTime() - 6000) return
     const config = this.#useConfig()
-    config.debug && console.log('pub', event.type)
     await axios.post(
       config.mercure.url,
       new URLSearchParams({

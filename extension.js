@@ -13,7 +13,6 @@ import pkg from './package.json' with { type: 'json' }
 export default class Extension {
   #bootstrap = null
   #category = null
-  #debug = false
   #demo = false
   #features = []
   #functions = []
@@ -39,7 +38,6 @@ export default class Extension {
       this.#publisher = new Publisher(
         () => {
           return {
-            debug: this.#debug,
             mercure,
           }
         },
@@ -63,7 +61,6 @@ export default class Extension {
       )
       new Subscriber(() => {
         return {
-          debug: this.#debug,
           extension: this,
           functions: this.#functions,
           mercure,
@@ -108,11 +105,6 @@ export default class Extension {
       throw new Error('bootstrap must be a function.')
     }
     this.#bootstrap = bootstrap
-    return this
-  }
-
-  enableDebug() {
-    this.#debug = true
     return this
   }
 

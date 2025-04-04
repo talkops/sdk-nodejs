@@ -27,7 +27,9 @@ export default class Subscriber {
 
   async #onEvent(event) {
     const config = this.#useConfig()
-    config.debug && console.log('sub', event.type)
+    if (event.type === 'ping') {
+      config.publisher.onPing()
+    }
     if (event.type === 'boot') {
       for (const name of Object.keys(event.parameters)) {
         for (const parameter of config.parameters) {
