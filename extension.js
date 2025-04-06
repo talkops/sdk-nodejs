@@ -1,3 +1,4 @@
+import Event from './event.js'
 import Publisher from './publisher.js'
 import Subscriber from './subscriber.js'
 import Parameter from './parameter.js'

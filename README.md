@@ -10,66 +10,62 @@ This software development kit is made to create [TalkOps](https://talkops.app) e
 
 *   [Alarm](#alarm)
 *   [Event](#event)
-    *   [setFrom](#setfrom)
-        *   [Parameters](#parameters)
-    *   [addTo](#addto)
-        *   [Parameters](#parameters-1)
 *   [Extension](#extension)
-    *   [Parameters](#parameters-2)
+    *   [Parameters](#parameters)
     *   [setBootstrap](#setbootstrap)
-        *   [Parameters](#parameters-3)
+        *   [Parameters](#parameters-1)
     *   [setDemo](#setdemo)
-        *   [Parameters](#parameters-4)
+        *   [Parameters](#parameters-2)
     *   [setName](#setname)
-        *   [Parameters](#parameters-5)
+        *   [Parameters](#parameters-3)
     *   [setIcon](#seticon)
-        *   [Parameters](#parameters-6)
+        *   [Parameters](#parameters-4)
     *   [setWebsite](#setwebsite)
-        *   [Parameters](#parameters-7)
+        *   [Parameters](#parameters-5)
     *   [setSoftwareVersion](#setsoftwareversion)
-        *   [Parameters](#parameters-8)
+        *   [Parameters](#parameters-6)
     *   [setCategory](#setcategory)
-        *   [Parameters](#parameters-9)
+        *   [Parameters](#parameters-7)
     *   [setFeatures](#setfeatures)
-        *   [Parameters](#parameters-10)
+        *   [Parameters](#parameters-8)
     *   [setinstallationSteps](#setinstallationsteps)
-        *   [Parameters](#parameters-11)
+        *   [Parameters](#parameters-9)
     *   [setParameters](#setparameters)
-        *   [Parameters](#parameters-12)
+        *   [Parameters](#parameters-10)
     *   [setInstructions](#setinstructions)
-        *   [Parameters](#parameters-13)
+        *   [Parameters](#parameters-11)
     *   [setFunctionSchemas](#setfunctionschemas)
-        *   [Parameters](#parameters-14)
+        *   [Parameters](#parameters-12)
     *   [setFunctions](#setfunctions)
-        *   [Parameters](#parameters-15)
+        *   [Parameters](#parameters-13)
     *   [send](#send)
-        *   [Parameters](#parameters-16)
+        *   [Parameters](#parameters-14)
 *   [Message](#message)
     *   [setText](#settext)
-        *   [Parameters](#parameters-17)
+        *   [Parameters](#parameters-15)
 *   [Notification](#notification)
     *   [setLevel](#setlevel)
-        *   [Parameters](#parameters-18)
+        *   [Parameters](#parameters-16)
 *   [Parameter](#parameter)
-    *   [Parameters](#parameters-19)
+    *   [Parameters](#parameters-17)
     *   [getName](#getname)
     *   [setOptional](#setoptional)
-        *   [Parameters](#parameters-20)
+        *   [Parameters](#parameters-18)
     *   [isOptional](#isoptional)
     *   [setDescription](#setdescription)
-        *   [Parameters](#parameters-21)
+        *   [Parameters](#parameters-19)
     *   [setDefaultValue](#setdefaultvalue)
-        *   [Parameters](#parameters-22)
+        *   [Parameters](#parameters-20)
     *   [setType](#settype)
-        *   [Parameters](#parameters-23)
+        *   [Parameters](#parameters-21)
     *   [getValue](#getvalue)
     *   [setValue](#setvalue)
-        *   [Parameters](#parameters-24)
+        *   [Parameters](#parameters-22)
     *   [hasValue](#hasvalue)
     *   [setAvailableValues](#setavailablevalues)
-        *   [Parameters](#parameters-25)
+        *   [Parameters](#parameters-23)
     *   [setPossibleValues](#setpossiblevalues)
-        *   [Parameters](#parameters-26)
+        *   [Parameters](#parameters-24)
 
 ### Alarm
 
@@ -80,22 +76,6 @@ Represents an alarm.
 ### Event
 
 Represents an event.
-
-#### setFrom
-
-##### Parameters
-
-*   `emitter` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The emitter of the event.
-
-Returns **[Event](#event)** The updated event instance.
-
-#### addTo
-
-##### Parameters
-
-*   `clientId` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The client target unique identifier of the event.
-
-Returns **[Event](#event)** The updated event instance.
 
 ### Extension
 
