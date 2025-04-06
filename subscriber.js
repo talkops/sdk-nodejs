@@ -29,6 +29,7 @@ export default class Subscriber {
     const config = this.#useConfig()
     if (event.type === 'ping') {
       config.publisher.onPing()
+      return
     }
     if (event.type === 'boot') {
       for (const name of Object.keys(event.parameters)) {
@@ -47,9 +48,10 @@ export default class Subscriber {
       if (ready && config.bootstrap) {
         config.bootstrap()
       }
+      return
     }
     if (event.type === 'function_call') {
-      for (const fn of extension.functions) {
+      for (const fn of config.functions) {
         if (fn.name !== event.name) continue
         const match = fn.toString().match(/\(([^)]*)\)/)
         const argumentsList = (match ? match[1].split(',').map((p) => p.trim()) : []).map(
