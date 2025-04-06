@@ -9,7 +9,6 @@ export default class Message extends Event {
 
   toJSON() {
     return {
-      ...super.toJSON(),
       text: this.#text,
       type: 'message',
     }
