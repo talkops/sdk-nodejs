@@ -29,8 +29,10 @@ export default class Publisher {
     }
   }
 
-  publishState() {
-    this.publishEvent({ type: 'state', state: this.#useState() })
+  async publishState() {
+    const event = { type: 'state', state: this.#useState() }
+    this.#lastEventState = JSON.stringify(event)
+    await this.publishEvent(event)
   }
 
   onPing() {
@@ -57,8 +59,7 @@ export default class Publisher {
   }
 
   async #publishState() {
-    const state = this.#useState()
-    const event = { type: 'state', state }
+    const event = { type: 'state', state: this.#useState() }
     const lastEventState = JSON.stringify(event)
     if (this.#lastEventState !== lastEventState) {
       await this.publishEvent(event)
