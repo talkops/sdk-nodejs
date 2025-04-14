@@ -1,4 +1,4 @@
-import Event from './event.js'
+import Media from './media.js'
 import Publisher from './publisher.js'
 import Subscriber from './subscriber.js'
 import Parameter from './parameter.js'
@@ -274,16 +274,46 @@ export default class Extension {
   }
 
   /**
-   * Send one or more events.
-   * @param {Event|Array<Event>} events - The events.
+   * Enables alarm.
    */
-  send(events) {
-    events = Array.isArray(events) ? events : [events]
-    if (!events.every((item) => item instanceof Event)) {
-      throw new Error('events must be an array of Event instances.')
+  enableAlarm() {
+    this.#publisher.publishEvent({ type: 'alarm' })
+  }
+
+  /**
+   * Send one or more medias.
+   * @param {Media|Array<Media>} medias - The medias.
+   */
+  sendMedias(medias) {
+    medias = Array.isArray(medias) ? medias : [medias]
+    if (!medias.every((item) => item instanceof Media)) {
+      throw new Error('medias must be an array of Media instances.')
     }
-    for (const event of events) {
-      this.#publisher.publishEvent(event.toJSON())
+    this.#publisher.publishEvent({
+      type: 'medias',
+      medias: medias.map((media) => media.toJSON()),
+    })
+  }
+
+  /**
+   * Send a message.
+   * @param {String} text - The text of the message.
+   */
+  sendMessage(text) {
+    if (typeof text !== 'string' || text.trim() === '') {
+      throw new TypeError('text must be a non-empty string.')
     }
+    this.#publisher.publishEvent({ type: 'message', text })
+  }
+
+  /**
+   * Send a notification.
+   * @param {String} text - The text of the notification.
+   */
+  sendNotification(text) {
+    if (typeof text !== 'string' || text.trim() === '') {
+      throw new TypeError('text must be a non-empty string.')
+    }
+    this.#publisher.publishEvent({ type: 'notification', text })
   }
 }

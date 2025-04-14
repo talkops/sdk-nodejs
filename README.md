@@ -8,74 +8,95 @@ This software development kit is made to create [TalkOps](https://talkops.app) e
 
 #### Table of Contents
 
-*   [Alarm](#alarm)
-*   [Event](#event)
-*   [Extension](#extension)
+*   [Attachment](#attachment)
     *   [Parameters](#parameters)
-    *   [setBootstrap](#setbootstrap)
+    *   [setFilename](#setfilename)
         *   [Parameters](#parameters-1)
-    *   [setDemo](#setdemo)
-        *   [Parameters](#parameters-2)
-    *   [setName](#setname)
+*   [Extension](#extension)
+    *   [Parameters](#parameters-2)
+    *   [setBootstrap](#setbootstrap)
         *   [Parameters](#parameters-3)
-    *   [setIcon](#seticon)
+    *   [setDemo](#setdemo)
         *   [Parameters](#parameters-4)
-    *   [setWebsite](#setwebsite)
+    *   [setName](#setname)
         *   [Parameters](#parameters-5)
-    *   [setSoftwareVersion](#setsoftwareversion)
+    *   [setIcon](#seticon)
         *   [Parameters](#parameters-6)
-    *   [setCategory](#setcategory)
+    *   [setWebsite](#setwebsite)
         *   [Parameters](#parameters-7)
-    *   [setFeatures](#setfeatures)
+    *   [setSoftwareVersion](#setsoftwareversion)
         *   [Parameters](#parameters-8)
-    *   [setinstallationSteps](#setinstallationsteps)
+    *   [setCategory](#setcategory)
         *   [Parameters](#parameters-9)
-    *   [setParameters](#setparameters)
+    *   [setFeatures](#setfeatures)
         *   [Parameters](#parameters-10)
-    *   [setInstructions](#setinstructions)
+    *   [setinstallationSteps](#setinstallationsteps)
         *   [Parameters](#parameters-11)
-    *   [setFunctionSchemas](#setfunctionschemas)
+    *   [setParameters](#setparameters)
         *   [Parameters](#parameters-12)
-    *   [setFunctions](#setfunctions)
+    *   [setInstructions](#setinstructions)
         *   [Parameters](#parameters-13)
-    *   [send](#send)
+    *   [setFunctionSchemas](#setfunctionschemas)
         *   [Parameters](#parameters-14)
-*   [Message](#message)
-    *   [setText](#settext)
+    *   [setFunctions](#setfunctions)
         *   [Parameters](#parameters-15)
-*   [Notification](#notification)
-    *   [setLevel](#setlevel)
+    *   [enableAlarm](#enablealarm)
+    *   [sendMedias](#sendmedias)
         *   [Parameters](#parameters-16)
+    *   [sendMessage](#sendmessage)
+        *   [Parameters](#parameters-17)
+    *   [sendNotification](#sendnotification)
+        *   [Parameters](#parameters-18)
+*   [Image](#image)
+*   [Link](#link)
+    *   [Parameters](#parameters-19)
+    *   [setUrl](#seturl)
+        *   [Parameters](#parameters-20)
+*   [Media](#media)
 *   [Parameter](#parameter)
-    *   [Parameters](#parameters-17)
+    *   [Parameters](#parameters-21)
     *   [getName](#getname)
     *   [setOptional](#setoptional)
-        *   [Parameters](#parameters-18)
+        *   [Parameters](#parameters-22)
     *   [isOptional](#isoptional)
     *   [setDescription](#setdescription)
-        *   [Parameters](#parameters-19)
+        *   [Parameters](#parameters-23)
     *   [setDefaultValue](#setdefaultvalue)
-        *   [Parameters](#parameters-20)
+        *   [Parameters](#parameters-24)
     *   [setType](#settype)
-        *   [Parameters](#parameters-21)
+        *   [Parameters](#parameters-25)
     *   [getValue](#getvalue)
     *   [setValue](#setvalue)
-        *   [Parameters](#parameters-22)
+        *   [Parameters](#parameters-26)
     *   [hasValue](#hasvalue)
     *   [setAvailableValues](#setavailablevalues)
-        *   [Parameters](#parameters-23)
+        *   [Parameters](#parameters-27)
     *   [setPossibleValues](#setpossiblevalues)
-        *   [Parameters](#parameters-24)
+        *   [Parameters](#parameters-28)
+*   [Video](#video)
 
-### Alarm
+### Attachment
 
-**Extends Event**
+**Extends Link**
 
-Represents an alarm.
+Represents an attachment.
 
-### Event
+#### Parameters
 
-Represents an event.
+*   `url` &#x20;
+*   `filename` &#x20;
+
+#### setFilename
+
+##### Parameters
+
+*   `filename` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The filename of the attachment.
+
+<!---->
+
+*   Throws **[TypeError](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/TypeError)** If the filename is not valid.
+
+Returns **[Attachment](#attachment)** The updated attachment instance.
 
 ### Extension
 
@@ -189,41 +210,65 @@ Returns **[Extension](#extension)** The updated extension instance.
 
 Returns **[Extension](#extension)** The updated extension instance.
 
-#### send
+#### enableAlarm
 
-Send one or more events.
+Enables alarm.
+
+#### sendMedias
+
+Send one or more medias.
 
 ##### Parameters
 
-*   `events` **([Event](#event) | [Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)<[Event](#event)>)** The events.
+*   `medias` **([Media](#media) | [Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)<[Media](#media)>)** The medias.
 
-### Message
+#### sendMessage
 
-**Extends Event**
-
-Represents a message.
-
-#### setText
+Send a message.
 
 ##### Parameters
 
 *   `text` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The text of the message.
 
-Returns **[Message](#message)** The updated message instance.
+#### sendNotification
 
-### Notification
-
-**Extends Message**
-
-Represents a notification.
-
-#### setLevel
+Send a notification.
 
 ##### Parameters
 
-*   `level` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The level of the notification (low, normal, high, critical).
+*   `text` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The text of the notification.
 
-Returns **[Notification](#notification)** The updated notification instance.
+### Image
+
+**Extends Link**
+
+Represents an image.
+
+### Link
+
+**Extends Media**
+
+Represents a link.
+
+#### Parameters
+
+*   `url` &#x20;
+
+#### setUrl
+
+##### Parameters
+
+*   `url` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The url of the link.
+
+<!---->
+
+*   Throws **[TypeError](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/TypeError)** If the url is not a valid URL.
+
+Returns **[Link](#link)** The updated link instance.
+
+### Media
+
+Represents a media.
 
 ### Parameter
 
@@ -304,3 +349,9 @@ Returns **[Parameter](#parameter)** The updated parameter instance.
 *   `possibleValues` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)<[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>** The possible values of the parameter.
 
 Returns **[Parameter](#parameter)** The updated parameter instance.
+
+### Video
+
+**Extends Link**
+
+Represents an video.
