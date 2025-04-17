@@ -9,6 +9,7 @@ export default class Publisher {
   constructor(useConfig, useState) {
     this.#useConfig = useConfig
     this.#useState = useState
+    setTimeout(() => this.#publishData(JSON.stringify({ type: 'init' })), 900)
     setTimeout(() => this.#publishState(), 1000)
 
     const originalStdoutWrite = process.stdout.write
@@ -42,12 +43,16 @@ export default class Publisher {
 
   async publishEvent(event) {
     if (this.#lastPingAt && this.#lastPingAt < new Date().getTime() - 6000) return
+    this.#publishData(JSON.stringify(event))
+  }
+
+  async #publishData(data) {
     const config = this.#useConfig()
     await axios.post(
       config.mercure.url,
       new URLSearchParams({
         topic: config.mercure.publisher.topic,
-        data: JSON.stringify(event),
+        data,
       }),
       {
         headers: {
