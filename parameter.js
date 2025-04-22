@@ -69,8 +69,8 @@ export default class Parameter {
    * @returns {Parameter} The updated parameter instance.
    */
   setDefaultValue(defaultValue) {
-    if (typeof defaultValue !== 'string' || defaultValue.trim() === '') {
-      throw new Error('defaultValue must be a non-empty string.')
+    if (typeof defaultValue !== 'string') {
+      throw new Error('defaultValue must be a string.')
     }
     this.#defaultValue = defaultValue
     return this
