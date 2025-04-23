@@ -55,7 +55,7 @@ export default class Subscriber {
         if (fn.name !== event.name) continue
         const match = fn.toString().match(/\(([^)]*)\)/)
         const argumentsList = (match ? match[1].split(',').map((p) => p.trim()) : []).map(
-          (name) => event.args[name] ?? event[name],
+          (name) => event.args[name] ?? event.defaultArgs[name],
         )
         event.output = await Reflect.apply(fn, null, argumentsList)
         config.publisher.publishEvent(event)
