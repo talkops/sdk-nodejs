@@ -12,7 +12,7 @@ import pkg from './package.json' with { type: 'json' }
  * @class
  */
 export default class Extension {
-  #bootstrap = null
+  #callbacks = {}
   #category = null
   #demo = false
   #features = []
@@ -62,12 +62,12 @@ export default class Extension {
       )
       new Subscriber(() => {
         return {
+          callbacks: this.#callbacks,
           extension: this,
           functions: this.#functions,
           mercure,
           parameters: this.#parameters,
           publisher: this.#publisher,
-          bootstrap: this.#bootstrap,
         }
       })
     }
@@ -98,14 +98,26 @@ export default class Extension {
   }
 
   /**
-   * @param {Function} bootstrap - The extension startup function.
+   * @param {Function} callback - The callback function executed on boot.
    * @returns {Extension} The updated extension instance.
    */
-  setBootstrap(bootstrap) {
-    if (typeof bootstrap !== 'function') {
-      throw new Error('bootstrap must be a function.')
+  onBoot(callback) {
+    if (typeof callback !== 'function') {
+      throw new Error('callback must be a function.')
     }
-    this.#bootstrap = bootstrap
+    this.#callbacks.boot = callback
+    return this
+  }
+
+  /**
+   * @param {Function} callback - The callback function executed on session.
+   * @returns {Extension} The updated extension instance.
+   */
+  onSession(callback) {
+    if (typeof callback !== 'function') {
+      throw new Error('callback must be a function.')
+    }
+    this.#callbacks.session = callback
     return this
   }
 

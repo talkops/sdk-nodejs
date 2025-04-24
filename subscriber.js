@@ -31,6 +31,12 @@ export default class Subscriber {
       config.publisher.onPing()
       return
     }
+    if (event.type === 'session') {
+      if (ready && config.callbacks.session) {
+        config.callbacks.session()
+      }
+      return
+    }
     if (event.type === 'boot') {
       for (const name of Object.keys(event.parameters)) {
         for (const parameter of config.parameters) {
@@ -45,8 +51,8 @@ export default class Subscriber {
         ready = false
       }
       config.publisher.publishState()
-      if (ready && config.bootstrap) {
-        config.bootstrap()
+      if (ready && config.callbacks.boot) {
+        config.callbacks.boot()
       }
       return
     }
