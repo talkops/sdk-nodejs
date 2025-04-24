@@ -32,7 +32,7 @@ export default class Subscriber {
       return
     }
     if (event.type === 'session') {
-      if (ready && config.callbacks.session) {
+      if (config.callbacks.session) {
         config.callbacks.session()
       }
       return
