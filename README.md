@@ -14,67 +14,65 @@ This software development kit is made to create [TalkOps](https://talkops.app) e
         *   [Parameters](#parameters-1)
 *   [Extension](#extension)
     *   [Parameters](#parameters-2)
-    *   [onBoot](#onboot)
+    *   [on](#on)
         *   [Parameters](#parameters-3)
-    *   [onSession](#onsession)
-        *   [Parameters](#parameters-4)
     *   [setDemo](#setdemo)
-        *   [Parameters](#parameters-5)
+        *   [Parameters](#parameters-4)
     *   [setName](#setname)
-        *   [Parameters](#parameters-6)
+        *   [Parameters](#parameters-5)
     *   [setIcon](#seticon)
-        *   [Parameters](#parameters-7)
+        *   [Parameters](#parameters-6)
     *   [setWebsite](#setwebsite)
-        *   [Parameters](#parameters-8)
+        *   [Parameters](#parameters-7)
     *   [setSoftwareVersion](#setsoftwareversion)
-        *   [Parameters](#parameters-9)
+        *   [Parameters](#parameters-8)
     *   [setCategory](#setcategory)
-        *   [Parameters](#parameters-10)
+        *   [Parameters](#parameters-9)
     *   [setFeatures](#setfeatures)
-        *   [Parameters](#parameters-11)
+        *   [Parameters](#parameters-10)
     *   [setinstallationSteps](#setinstallationsteps)
-        *   [Parameters](#parameters-12)
+        *   [Parameters](#parameters-11)
     *   [setParameters](#setparameters)
-        *   [Parameters](#parameters-13)
+        *   [Parameters](#parameters-12)
     *   [setInstructions](#setinstructions)
-        *   [Parameters](#parameters-14)
+        *   [Parameters](#parameters-13)
     *   [setFunctionSchemas](#setfunctionschemas)
-        *   [Parameters](#parameters-15)
+        *   [Parameters](#parameters-14)
     *   [setFunctions](#setfunctions)
-        *   [Parameters](#parameters-16)
+        *   [Parameters](#parameters-15)
     *   [enableAlarm](#enablealarm)
     *   [sendMedias](#sendmedias)
-        *   [Parameters](#parameters-17)
+        *   [Parameters](#parameters-16)
     *   [sendMessage](#sendmessage)
-        *   [Parameters](#parameters-18)
+        *   [Parameters](#parameters-17)
     *   [sendNotification](#sendnotification)
-        *   [Parameters](#parameters-19)
+        *   [Parameters](#parameters-18)
 *   [Image](#image)
 *   [Link](#link)
-    *   [Parameters](#parameters-20)
+    *   [Parameters](#parameters-19)
     *   [setUrl](#seturl)
-        *   [Parameters](#parameters-21)
+        *   [Parameters](#parameters-20)
 *   [Media](#media)
 *   [Parameter](#parameter)
-    *   [Parameters](#parameters-22)
+    *   [Parameters](#parameters-21)
     *   [getName](#getname)
     *   [setOptional](#setoptional)
-        *   [Parameters](#parameters-23)
+        *   [Parameters](#parameters-22)
     *   [isOptional](#isoptional)
     *   [setDescription](#setdescription)
-        *   [Parameters](#parameters-24)
+        *   [Parameters](#parameters-23)
     *   [setDefaultValue](#setdefaultvalue)
-        *   [Parameters](#parameters-25)
+        *   [Parameters](#parameters-24)
     *   [setType](#settype)
-        *   [Parameters](#parameters-26)
+        *   [Parameters](#parameters-25)
     *   [getValue](#getvalue)
     *   [setValue](#setvalue)
-        *   [Parameters](#parameters-27)
+        *   [Parameters](#parameters-26)
     *   [hasValue](#hasvalue)
     *   [setAvailableValues](#setavailablevalues)
-        *   [Parameters](#parameters-28)
+        *   [Parameters](#parameters-27)
     *   [setPossibleValues](#setpossiblevalues)
-        *   [Parameters](#parameters-29)
+        *   [Parameters](#parameters-28)
 *   [Video](#video)
 
 ### Attachment
@@ -108,19 +106,12 @@ Represents an extension.
 
 *   `token` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The token of the extension.
 
-#### onBoot
+#### on
 
 ##### Parameters
 
-*   `callback` **[Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)** The callback function executed on boot.
-
-Returns **[Extension](#extension)** The updated extension instance.
-
-#### onSession
-
-##### Parameters
-
-*   `callback` **[Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)** The callback function executed on session.
+*   `eventType` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The event type.
+*   `cb` **[Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)** The callback function.
 
 Returns **[Extension](#extension)** The updated extension instance.
 

@@ -4,6 +4,8 @@ import Subscriber from './subscriber.js'
 import Parameter from './parameter.js'
 import Readme from './readme.js'
 import Manifest from './manifest.js'
+
+import eventTypes from './event-types.json' with { type: 'json' }
 import categories from './categories.json' with { type: 'json' }
 import pkg from './package.json' with { type: 'json' }
 
@@ -98,26 +100,18 @@ export default class Extension {
   }
 
   /**
-   * @param {Function} callback - The callback function executed on boot.
+   * @param {String} eventType - The event type.
+   * @param {Function} cb - The callback function.
    * @returns {Extension} The updated extension instance.
    */
-  onBoot(callback) {
-    if (typeof callback !== 'function') {
-      throw new Error('callback must be a function.')
+  on(eventType, cb) {
+    if (!eventTypes.includes(eventType)) {
+      throw new Error(`eventType must be one of the following strings: ${eventTypes.join(', ')}`)
     }
-    this.#callbacks.boot = callback
-    return this
-  }
-
-  /**
-   * @param {Function} callback - The callback function executed on session.
-   * @returns {Extension} The updated extension instance.
-   */
-  onSession(callback) {
-    if (typeof callback !== 'function') {
-      throw new Error('callback must be a function.')
+    if (typeof cb !== 'function') {
+      throw new Error('cb must be a function.')
     }
-    this.#callbacks.session = callback
+    this.#callbacks[eventType] = cb
     return this
   }
 

@@ -1,4 +1,5 @@
 import { EventSource } from 'eventsource'
+import eventTypes from './event-types.json' with { type: 'json' }
 
 export default class Subscriber {
   #useConfig = null
@@ -31,11 +32,17 @@ export default class Subscriber {
       config.publisher.onPing()
       return
     }
-    if (event.type === 'session') {
-      if (config.callbacks.session) {
-        config.callbacks.session()
+    if (event.type === 'function_call') {
+      for (const fn of config.functions) {
+        if (fn.name !== event.name) continue
+        const match = fn.toString().match(/\(([^)]*)\)/)
+        const argumentsList = (match ? match[1].split(',').map((p) => p.trim()) : []).map(
+          (name) => event.args[name] ?? event.defaultArgs[name],
+        )
+        event.output = await Reflect.apply(fn, null, argumentsList)
+        config.publisher.publishEvent(event)
+        return
       }
-      return
     }
     if (event.type === 'boot') {
       for (const name of Object.keys(event.parameters)) {
@@ -51,22 +58,14 @@ export default class Subscriber {
         ready = false
       }
       config.publisher.publishState()
-      if (ready && config.callbacks.boot) {
-        config.callbacks.boot()
-      }
-      return
+      if (!ready) return
     }
-    if (event.type === 'function_call') {
-      for (const fn of config.functions) {
-        if (fn.name !== event.name) continue
-        const match = fn.toString().match(/\(([^)]*)\)/)
-        const argumentsList = (match ? match[1].split(',').map((p) => p.trim()) : []).map(
-          (name) => event.args[name] ?? event.defaultArgs[name],
-        )
-        event.output = await Reflect.apply(fn, null, argumentsList)
-        config.publisher.publishEvent(event)
-        return
-      }
+    if (eventTypes.includes(event.type) && config.callbacks[event.type]) {
+      const match = config.callbacks[event.type].toString().match(/\(([^)]*)\)/)
+      const argumentsList = (match ? match[1].split(',').map((p) => p.trim()) : []).map(
+        (name) => event.args[name],
+      )
+      await Reflect.apply(config.callbacks[event.type], null, argumentsList)
     }
   }
 }
