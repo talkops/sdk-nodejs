@@ -1,8 +1,8 @@
 {
   "name": "talkops",
   "description": "TalkOps SDK",
-  "version": "2.14.0",
-  "author": "bierdok",
+  "version": "2.14.1",
+  "author": "PicoUX",
   "license": "MIT",
   "main": "index.mjs",
   "dependencies": {
