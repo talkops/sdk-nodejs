@@ -9,8 +9,6 @@ export default class Publisher {
   constructor(useConfig, useState) {
     this.#useConfig = useConfig
     this.#useState = useState
-    setTimeout(() => this.#publishData(JSON.stringify({ type: 'init' })), 900)
-    setTimeout(() => this.#publishState(), 1000)
 
     const originalStdoutWrite = process.stdout.write
     process.stdout.write = (chunk) => {
@@ -28,6 +26,8 @@ export default class Publisher {
       })
       originalStderrWrite.call(process.stderr, chunk)
     }
+    this.#publishData(JSON.stringify({ type: 'init' }))
+    setTimeout(() => this.#publishState(), 100)
   }
 
   async publishState() {

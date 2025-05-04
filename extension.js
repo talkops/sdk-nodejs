@@ -26,6 +26,8 @@ export default class Extension {
   #name = null
   #parameters = []
   #softwareVersion = null
+  #started = false
+  #token = null
   #website = null
 
   #publisher = null
@@ -35,9 +37,12 @@ export default class Extension {
    * @returns {Extension} The created extension instance.
    */
   constructor(token) {
-    token = token || process.argv[2] || process.env.TALKOPS_TOKEN
-    if (token) {
-      const mercure = JSON.parse(Buffer.from(token, 'base64').toString())
+    this.#token = token || process.argv[2] || process.env.TALKOPS_TOKEN
+  }
+
+  async #setup() {
+    if (this.#token) {
+      const mercure = JSON.parse(Buffer.from(this.#token, 'base64').toString())
       this.#publisher = new Publisher(
         () => {
           return {
@@ -97,6 +102,16 @@ export default class Extension {
         }
       })
     }
+  }
+
+  /**
+   * @returns {Extension} The starting extension instance.
+   */
+  start() {
+    if (this.#started) return
+    this.#started = true
+    setTimeout(() => this.#setup(), 500)
+    return this
   }
 
   /**
