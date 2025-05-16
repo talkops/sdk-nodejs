@@ -11,19 +11,25 @@ export default class Subscriber {
 
   #subscribe() {
     const config = this.#useConfig()
-    new EventSource(
-      `${config.mercure.url}?topic=${encodeURIComponent(config.mercure.subscriber.topic)}`,
-      {
-        fetch: (input, init) =>
-          fetch(input, {
-            ...init,
-            headers: {
-              ...init.headers,
-              Authorization: `Bearer ${config.mercure.subscriber.token}`,
-            },
-          }),
-      },
-    ).addEventListener('message', (message) => this.#onEvent(JSON.parse(message.data)))
+    const url = `${config.mercure.url}?topic=${encodeURIComponent(config.mercure.subscriber.topic)}`
+
+    const es = new EventSource(url, {
+      fetch: (input, init) =>
+        fetch(input, {
+          ...init,
+          headers: {
+            ...init.headers,
+            Authorization: `Bearer ${config.mercure.subscriber.token}`,
+          },
+        }),
+    })
+
+    es.addEventListener('message', (message) => this.#onEvent(JSON.parse(message.data)))
+
+    es.onerror = () => {
+      es.close()
+      setTimeout(() => this.#subscribe(), 1000)
+    }
   }
 
   async #onEvent(event) {
@@ -48,7 +54,9 @@ export default class Subscriber {
       for (const name of Object.keys(event.parameters)) {
         for (const parameter of config.parameters) {
           if (parameter.getName() !== name) continue
-          parameter.setValue(event.parameters[name])
+          parameter.setValue(
+            typeof event.parameters[name] === 'string' ? event.parameters[name] : '',
+          )
         }
       }
       let ready = true

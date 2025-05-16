@@ -5,8 +5,8 @@
 export default class Parameter {
   #name = null
   #description = null
-  #value = null
-  #defaultValue = null
+  #value = ''
+  #defaultValue = ''
   #availableValues = []
   #possibleValues = []
   #optional = false
@@ -111,12 +111,12 @@ export default class Parameter {
   }
 
   /**
-   * @param {String|null} value - The value of the parameter.
+   * @param {String} value - The value of the parameter.
    * @returns {Parameter} The updated parameter instance.
    */
   setValue(value) {
-    if (value !== null && (typeof value !== 'string' || value.trim() === '')) {
-      throw new Error('value must be a non-empty string.')
+    if (typeof value !== 'string') {
+      throw new Error('value must be a string.')
     }
     this.#value = value
     return this
@@ -126,7 +126,7 @@ export default class Parameter {
    * @returns {Boolean} If the parameter is not empty.
    */
   hasValue() {
-    return this.getValue() !== null && this.getValue() !== ''
+    return this.getValue() !== ''
   }
 
   /**

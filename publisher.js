@@ -15,6 +15,7 @@ export default class Publisher {
       this.publishEvent({
         type: 'stdout',
         data: chunk.toString().trim(),
+        time: new Date().getTime(),
       })
       originalStdoutWrite.call(process.stdout, chunk)
     }
@@ -23,11 +24,12 @@ export default class Publisher {
       this.publishEvent({
         type: 'stderr',
         data: chunk.toString().trim(),
+        time: new Date().getTime(),
       })
       originalStderrWrite.call(process.stderr, chunk)
     }
     this.#publishData(JSON.stringify({ type: 'init' }))
-    setTimeout(() => this.#publishState(), 100)
+    setTimeout(() => this.#publishState(), 200)
   }
 
   async publishState() {
