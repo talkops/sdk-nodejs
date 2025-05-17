@@ -13,66 +13,66 @@ This software development kit is made to create [TalkOps](https://talkops.app) e
     *   [setFilename](#setfilename)
         *   [Parameters](#parameters-1)
 *   [Extension](#extension)
-    *   [Parameters](#parameters-2)
+    *   [start](#start)
     *   [on](#on)
-        *   [Parameters](#parameters-3)
+        *   [Parameters](#parameters-2)
     *   [setDemo](#setdemo)
-        *   [Parameters](#parameters-4)
+        *   [Parameters](#parameters-3)
     *   [setName](#setname)
-        *   [Parameters](#parameters-5)
+        *   [Parameters](#parameters-4)
     *   [setIcon](#seticon)
-        *   [Parameters](#parameters-6)
+        *   [Parameters](#parameters-5)
     *   [setWebsite](#setwebsite)
-        *   [Parameters](#parameters-7)
+        *   [Parameters](#parameters-6)
     *   [setSoftwareVersion](#setsoftwareversion)
-        *   [Parameters](#parameters-8)
+        *   [Parameters](#parameters-7)
     *   [setCategory](#setcategory)
-        *   [Parameters](#parameters-9)
+        *   [Parameters](#parameters-8)
     *   [setFeatures](#setfeatures)
-        *   [Parameters](#parameters-10)
+        *   [Parameters](#parameters-9)
     *   [setinstallationSteps](#setinstallationsteps)
-        *   [Parameters](#parameters-11)
+        *   [Parameters](#parameters-10)
     *   [setParameters](#setparameters)
-        *   [Parameters](#parameters-12)
+        *   [Parameters](#parameters-11)
     *   [setInstructions](#setinstructions)
-        *   [Parameters](#parameters-13)
+        *   [Parameters](#parameters-12)
     *   [setFunctionSchemas](#setfunctionschemas)
-        *   [Parameters](#parameters-14)
+        *   [Parameters](#parameters-13)
     *   [setFunctions](#setfunctions)
-        *   [Parameters](#parameters-15)
+        *   [Parameters](#parameters-14)
     *   [enableAlarm](#enablealarm)
     *   [sendMedias](#sendmedias)
-        *   [Parameters](#parameters-16)
+        *   [Parameters](#parameters-15)
     *   [sendMessage](#sendmessage)
-        *   [Parameters](#parameters-17)
+        *   [Parameters](#parameters-16)
     *   [sendNotification](#sendnotification)
-        *   [Parameters](#parameters-18)
+        *   [Parameters](#parameters-17)
 *   [Image](#image)
 *   [Link](#link)
-    *   [Parameters](#parameters-19)
+    *   [Parameters](#parameters-18)
     *   [setUrl](#seturl)
-        *   [Parameters](#parameters-20)
+        *   [Parameters](#parameters-19)
 *   [Media](#media)
 *   [Parameter](#parameter)
-    *   [Parameters](#parameters-21)
+    *   [Parameters](#parameters-20)
     *   [getName](#getname)
     *   [setOptional](#setoptional)
-        *   [Parameters](#parameters-22)
+        *   [Parameters](#parameters-21)
     *   [isOptional](#isoptional)
     *   [setDescription](#setdescription)
-        *   [Parameters](#parameters-23)
+        *   [Parameters](#parameters-22)
     *   [setDefaultValue](#setdefaultvalue)
-        *   [Parameters](#parameters-24)
+        *   [Parameters](#parameters-23)
     *   [setType](#settype)
-        *   [Parameters](#parameters-25)
+        *   [Parameters](#parameters-24)
     *   [getValue](#getvalue)
     *   [setValue](#setvalue)
-        *   [Parameters](#parameters-26)
+        *   [Parameters](#parameters-25)
     *   [hasValue](#hasvalue)
     *   [setAvailableValues](#setavailablevalues)
-        *   [Parameters](#parameters-27)
+        *   [Parameters](#parameters-26)
     *   [setPossibleValues](#setpossiblevalues)
-        *   [Parameters](#parameters-28)
+        *   [Parameters](#parameters-27)
 *   [Video](#video)
 
 ### Attachment
@@ -102,9 +102,9 @@ Returns **[Attachment](#attachment)** The updated attachment instance.
 
 Represents an extension.
 
-#### Parameters
+#### start
 
-*   `token` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The token of the extension.
+Returns **[Extension](#extension)** The starting extension instance.
 
 #### on
 
@@ -327,7 +327,7 @@ Returns **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/G
 
 ##### Parameters
 
-*   `value` **([String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String) | null)** The value of the parameter.
+*   `value` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The value of the parameter.
 
 Returns **[Parameter](#parameter)** The updated parameter instance.
 
