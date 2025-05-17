@@ -1,14 +1,12 @@
 {
   "name": "talkops",
   "description": "TalkOps SDK",
-  "version": "2.15.1",
+  "version": "2.15.2",
   "author": "PicoUX",
   "license": "MIT",
   "main": "index.mjs",
   "dependencies": {
-    "axios": "^1.8.3",
-    "ejs": "^3.1.10",
-    "eventsource": "^3.0.5"
+    "ejs": "^3.1.10"
   },
   "scripts": {
     "doc": "documentation readme *.js -s Documentation"

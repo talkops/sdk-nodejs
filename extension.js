@@ -1,6 +1,5 @@
+import EventBus from './event-bus.js'
 import Media from './media.js'
-import Publisher from './publisher.js'
-import Subscriber from './subscriber.js'
 import Parameter from './parameter.js'
 import Readme from './readme.js'
 import Manifest from './manifest.js'
@@ -17,6 +16,7 @@ export default class Extension {
   #callbacks = {}
   #category = null
   #demo = false
+  #eventBus = null
   #features = []
   #functions = []
   #functionSchemas = []
@@ -27,81 +27,58 @@ export default class Extension {
   #parameters = []
   #softwareVersion = null
   #started = false
-  #token = null
   #website = null
 
-  #publisher = null
-
-  /**
-   * @param {String} token - The token of the extension.
-   * @returns {Extension} The created extension instance.
-   */
-  constructor(token) {
-    this.#token = token || process.argv[2] || process.env.TALKOPS_TOKEN
-  }
-
   async #setup() {
-    if (this.#token) {
-      const mercure = JSON.parse(Buffer.from(this.#token, 'base64').toString())
-      this.#publisher = new Publisher(
-        () => {
-          return {
-            mercure,
-          }
-        },
-        () => {
-          return {
-            category: this.#category,
-            demo: this.#demo,
-            icon: this.#icon,
-            installationSteps: this.#installationSteps,
-            instructions: this.#instructions,
-            name: this.#name,
-            parameters: this.#parameters,
-            sdk: {
-              name: 'nodejs',
-              version: pkg.version,
-            },
-            softwareVersion: this.#softwareVersion,
-            functionSchemas: this.#functionSchemas,
-          }
-        },
-      )
-      new Subscriber(() => {
-        return {
-          callbacks: this.#callbacks,
-          extension: this,
-          functions: this.#functions,
-          mercure,
-          parameters: this.#parameters,
-          publisher: this.#publisher,
-        }
-      })
-    }
-
-    if (process.env.NODE_ENV && process.env.NODE_ENV === 'development') {
-      new Readme(() => {
-        return {
-          features: this.#features,
-          name: this.#name,
-        }
-      })
-      new Manifest(() => {
+    this.#eventBus = new EventBus(
+      () => {
         return {
           category: this.#category,
           demo: this.#demo,
-          features: this.#features,
           icon: this.#icon,
+          installationSteps: this.#installationSteps,
+          instructions: this.#instructions,
           name: this.#name,
+          parameters: this.#parameters,
           sdk: {
             name: 'nodejs',
             version: pkg.version,
           },
           softwareVersion: this.#softwareVersion,
-          website: this.#website,
+          functionSchemas: this.#functionSchemas,
         }
-      })
-    }
+      },
+      () => {
+        return {
+          callbacks: this.#callbacks,
+          functions: this.#functions,
+          parameters: this.#parameters,
+        }
+      },
+    )
+
+    new Readme(() => {
+      return {
+        features: this.#features,
+        name: this.#name,
+      }
+    })
+
+    new Manifest(() => {
+      return {
+        category: this.#category,
+        demo: this.#demo,
+        features: this.#features,
+        icon: this.#icon,
+        name: this.#name,
+        sdk: {
+          name: 'nodejs',
+          version: pkg.version,
+        },
+        softwareVersion: this.#softwareVersion,
+        website: this.#website,
+      }
+    })
   }
 
   /**
@@ -298,7 +275,7 @@ export default class Extension {
    * Enables alarm.
    */
   enableAlarm() {
-    this.#publisher.publishEvent({ type: 'alarm' })
+    this.#eventBus.publishEvent({ type: 'alarm' })
   }
 
   /**
@@ -310,7 +287,7 @@ export default class Extension {
     if (!medias.every((item) => item instanceof Media)) {
       throw new Error('medias must be an array of Media instances.')
     }
-    this.#publisher.publishEvent({
+    this.#eventBus.publishEvent({
       type: 'medias',
       medias: medias.map((media) => media.toJSON()),
     })
@@ -324,7 +301,7 @@ export default class Extension {
     if (typeof text !== 'string' || text.trim() === '') {
       throw new TypeError('text must be a non-empty string.')
     }
-    this.#publisher.publishEvent({ type: 'message', text })
+    this.#eventBus.publishEvent({ type: 'message', text })
   }
 
   /**
@@ -335,6 +312,6 @@ export default class Extension {
     if (typeof text !== 'string' || text.trim() === '') {
       throw new TypeError('text must be a non-empty string.')
     }
-    this.#publisher.publishEvent({ type: 'notification', text })
+    this.#eventBus.publishEvent({ type: 'notification', text })
   }
 }
