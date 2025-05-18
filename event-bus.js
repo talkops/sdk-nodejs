@@ -29,7 +29,7 @@ export default class EventBus {
   }
 
   async publishEvent(event) {
-    this.#client.write(JSON.stringify(event))
+    this.#client.write(`${JSON.stringify(event)}\n`)
   }
 
   async #publishStatePeriodically() {
