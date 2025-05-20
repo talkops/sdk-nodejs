@@ -36,7 +36,7 @@ export default class EventBus {
 
   async #publishStatePeriodically() {
     while (true) {
-      await new Promise((resolve) => setTimeout(resolve, 500))
+      await new Promise((resolve) => setTimeout(resolve, 1000))
       const event = this.#generateEventState()
       const lastEventState = JSON.stringify(event)
       if (this.#lastEventState !== lastEventState) {
