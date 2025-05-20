@@ -3,12 +3,14 @@ import { createConnection } from 'net'
 export default class EventBus {
   #useState = null
   #useConfig = null
+  #setEnabled = null
   #lastEventState = null
   #client = null
 
-  constructor(useState, useConfig) {
+  constructor(useState, useConfig, setEnabled) {
     this.#useState = useState
     this.#useConfig = useConfig
+    this.#setEnabled = setEnabled
     this.#client = createConnection(process.env.TALKOPS_SOCKET, () => {
       this.publishEvent({ type: 'init' })
       this.#publishStatePeriodically()
@@ -47,6 +49,7 @@ export default class EventBus {
   async #onEvent(event) {
     const config = this.#useConfig()
     if (event.type === 'boot') {
+      this.#setEnabled(event.enabled)
       for (const name of Object.keys(event.parameters)) {
         for (const parameter of config.parameters) {
           if (parameter.getName() !== name) continue
@@ -55,15 +58,21 @@ export default class EventBus {
           )
         }
       }
-      let ready = true
-      for (const parameter of config.parameters) {
-        if (parameter.isOptional()) continue
-        if (parameter.hasValue()) continue
-        ready = false
-      }
       this.#publishState()
-      if (!ready) return
     }
+    if (event.type === 'enable') {
+      this.#setEnabled(true)
+    }
+    if (event.type === 'disable') {
+      this.#setEnabled(false)
+    }
+    let ready = true
+    for (const parameter of config.parameters) {
+      if (parameter.isOptional()) continue
+      if (parameter.hasValue()) continue
+      ready = false
+    }
+    if (!ready) return
     if (event.type === 'function_call') {
       for (const fn of config.functions) {
         if (fn.name !== event.name) continue

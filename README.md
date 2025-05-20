@@ -16,6 +16,7 @@ This software development kit is made to create [TalkOps](https://talkops.app) e
     *   [start](#start)
     *   [on](#on)
         *   [Parameters](#parameters-2)
+    *   [isEnabled](#isenabled)
     *   [setDemo](#setdemo)
         *   [Parameters](#parameters-3)
     *   [setName](#setname)
@@ -114,6 +115,10 @@ Returns **[Extension](#extension)** The starting extension instance.
 *   `cb` **[Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)** The callback function.
 
 Returns **[Extension](#extension)** The updated extension instance.
+
+#### isEnabled
+
+Returns **[Boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** If the extension is enabled.
 
 #### setDemo
 

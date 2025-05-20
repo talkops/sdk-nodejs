@@ -16,6 +16,7 @@ export default class Extension {
   #callbacks = {}
   #category = null
   #demo = false
+  #enabled = false
   #eventBus = null
   #features = []
   #functions = []
@@ -54,6 +55,9 @@ export default class Extension {
           functions: this.#functions,
           parameters: this.#parameters,
         }
+      },
+      (enabled) => {
+        this.#enabled = enabled
       },
     )
 
@@ -105,6 +109,13 @@ export default class Extension {
     }
     this.#callbacks[eventType] = cb
     return this
+  }
+
+  /**
+   * @returns {Boolean} If the extension is enabled.
+   */
+  isEnabled() {
+    return this.#enabled
   }
 
   /**
