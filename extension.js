@@ -26,7 +26,6 @@ export default class Extension {
   #instructions = null
   #name = null
   #parameters = []
-  #softwareVersion = null
   #started = false
   #website = null
 
@@ -45,7 +44,6 @@ export default class Extension {
             name: 'nodejs',
             version: pkg.version,
           },
-          softwareVersion: this.#softwareVersion,
           functionSchemas: this.#functionSchemas,
         }
       },
@@ -79,7 +77,6 @@ export default class Extension {
           name: 'nodejs',
           version: pkg.version,
         },
-        softwareVersion: this.#softwareVersion,
         website: this.#website,
       }
     })
@@ -173,15 +170,6 @@ export default class Extension {
       throw new Error('website must be a valid URL.')
     }
     this.#website = website
-    return this
-  }
-
-  /**
-   * @param {String} softwareVersion - The version of the software.
-   * @returns {Extension} The updated extension instance.
-   */
-  setSoftwareVersion(softwareVersion) {
-    this.#softwareVersion = softwareVersion
     return this
   }
 

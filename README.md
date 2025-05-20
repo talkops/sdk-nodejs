@@ -25,55 +25,53 @@ This software development kit is made to create [TalkOps](https://talkops.app) e
         *   [Parameters](#parameters-5)
     *   [setWebsite](#setwebsite)
         *   [Parameters](#parameters-6)
-    *   [setSoftwareVersion](#setsoftwareversion)
-        *   [Parameters](#parameters-7)
     *   [setCategory](#setcategory)
-        *   [Parameters](#parameters-8)
+        *   [Parameters](#parameters-7)
     *   [setFeatures](#setfeatures)
-        *   [Parameters](#parameters-9)
+        *   [Parameters](#parameters-8)
     *   [setinstallationSteps](#setinstallationsteps)
-        *   [Parameters](#parameters-10)
+        *   [Parameters](#parameters-9)
     *   [setParameters](#setparameters)
-        *   [Parameters](#parameters-11)
+        *   [Parameters](#parameters-10)
     *   [setInstructions](#setinstructions)
-        *   [Parameters](#parameters-12)
+        *   [Parameters](#parameters-11)
     *   [setFunctionSchemas](#setfunctionschemas)
-        *   [Parameters](#parameters-13)
+        *   [Parameters](#parameters-12)
     *   [setFunctions](#setfunctions)
-        *   [Parameters](#parameters-14)
+        *   [Parameters](#parameters-13)
     *   [enableAlarm](#enablealarm)
     *   [sendMedias](#sendmedias)
-        *   [Parameters](#parameters-15)
+        *   [Parameters](#parameters-14)
     *   [sendMessage](#sendmessage)
-        *   [Parameters](#parameters-16)
+        *   [Parameters](#parameters-15)
     *   [sendNotification](#sendnotification)
-        *   [Parameters](#parameters-17)
+        *   [Parameters](#parameters-16)
 *   [Image](#image)
 *   [Link](#link)
-    *   [Parameters](#parameters-18)
+    *   [Parameters](#parameters-17)
     *   [setUrl](#seturl)
-        *   [Parameters](#parameters-19)
+        *   [Parameters](#parameters-18)
 *   [Media](#media)
 *   [Parameter](#parameter)
-    *   [Parameters](#parameters-20)
+    *   [Parameters](#parameters-19)
     *   [getName](#getname)
     *   [setOptional](#setoptional)
-        *   [Parameters](#parameters-21)
+        *   [Parameters](#parameters-20)
     *   [isOptional](#isoptional)
     *   [setDescription](#setdescription)
-        *   [Parameters](#parameters-22)
+        *   [Parameters](#parameters-21)
     *   [setDefaultValue](#setdefaultvalue)
-        *   [Parameters](#parameters-23)
+        *   [Parameters](#parameters-22)
     *   [setType](#settype)
-        *   [Parameters](#parameters-24)
+        *   [Parameters](#parameters-23)
     *   [getValue](#getvalue)
     *   [setValue](#setvalue)
-        *   [Parameters](#parameters-25)
+        *   [Parameters](#parameters-24)
     *   [hasValue](#hasvalue)
     *   [setAvailableValues](#setavailablevalues)
-        *   [Parameters](#parameters-26)
+        *   [Parameters](#parameters-25)
     *   [setPossibleValues](#setpossiblevalues)
-        *   [Parameters](#parameters-27)
+        *   [Parameters](#parameters-26)
 *   [Video](#video)
 
 ### Attachment
@@ -149,14 +147,6 @@ Returns **[Extension](#extension)** The updated extension instance.
 ##### Parameters
 
 *   `website` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The website url of the extension.
-
-Returns **[Extension](#extension)** The updated extension instance.
-
-#### setSoftwareVersion
-
-##### Parameters
-
-*   `softwareVersion` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The version of the software.
 
 Returns **[Extension](#extension)** The updated extension instance.
 
